@@ -83,6 +83,10 @@ add_rstudio_shortcuts <- function(path = NULL) {
   if (is.null(path)) {
     path <- getOption("shrtcts.path", NULL)
   } else {
+    path <- fs::path_norm(path)
+    if (!fs::file_exists(path)) {
+      stop("shrtcts file does not exist: ", path, call. = FALSE)
+    }
     options("shrtcts.path" = path)
   }
   if (is.null(path)) path <- find_shortcuts_yaml()
