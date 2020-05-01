@@ -135,8 +135,13 @@ parse_shortcuts_yaml <- function(path) {
   x <- yaml::read_yaml(path)
   x <- add_shortcut_ids(x)
   lapply(x, function(shortcut) {
-    stopifnot("Name" %in% names(shortcut))
-    stopifnot("Binding" %in% names(shortcut))
+    stopifnot("name" %in% tolower(names(shortcut)))
+    stopifnot("binding" %in% tolower(names(shortcut)))
+    for (name in c("Name", "Binding", "Description", "Interactive")) {
+      if (tolower(name) %in% names(shortcut) && !name %in% names(shortcut)) {
+        names(shortcut)[which(tolower(name) == names(shortcut))] <- name
+      }
+    }
     shortcut[["function"]] <- shortcut$Binding
     shortcut$Binding <- sprintf("shortcut_%02d", shortcut$id)
     if (!"Description" %in% names(shortcut)) {
