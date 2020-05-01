@@ -11,6 +11,14 @@ An easily customizable method for creating RStudio
     other packages. Your shortcuts are stored in a YAML file in your home 
     directory.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/gadenbuie/shrtcts}
+  \item Report bugs at \url{https://github.com/gadenbuie/shrtcts/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Garrick Aden-Buie \email{garrick@adenbuie.com} (\href{https://orcid.org/0000-0002-7111-0077}{ORCID})
 
