@@ -43,6 +43,10 @@ if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
 After restarting your R session, you’ll find your new shortcut **Say
 Something Nice** in your RStudio Addins menu\!
 
+If you store your `.shrtcts.yaml` file in your home directory, you could
+also just run `shrtcts::add_rstudio_shortcuts()` whenever you update the
+YAML file instead of adding the above code to your `~/.Rprofile`.
+
 ## Details
 
 ### shrtcts YAML format
