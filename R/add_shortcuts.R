@@ -160,6 +160,14 @@ add_shortcut_ids <- function(x) {
       immediate. = TRUE
     )
   }
+  if (any(declared_ids > 100)) {
+    bad <- unqiue(declared_ids[declared_ids > 100])
+    stop(
+      "Shortcuts with id > 100 will not work: ",
+      paste(bad, collapse = ", "),
+      call. = FALSE
+    )
+  }
   ids <- c()
   i <- 1L
   for (idx in seq_along(x)) {
