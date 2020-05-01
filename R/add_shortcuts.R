@@ -100,7 +100,7 @@ example_shortcuts_yaml <- function() {
   invisible(x)
 }
 
-how_to_use <- function() `?`("add_rstudio_shortcuts", "shrtcts")
+how_to_use <- function() `?`(shrtcts::add_rstudio_shortcuts)
 
 find_shortcuts_yaml <- function() {
   try_dirs <- c(
