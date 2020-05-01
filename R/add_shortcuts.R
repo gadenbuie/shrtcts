@@ -177,14 +177,16 @@ add_shortcut_ids <- function(x) {
 }
 
 as_dcf <- function(x) {
-  txt_con <- textConnection("txt", "w")
-  lapply(x, function(s) {
-    s[["function"]] <- NULL
-    write.dcf(s, txt_con)
-    cat("\n", file = txt_con)
+  local({
+    txt_con <- textConnection("txt", "w")
+    lapply(x, function(s) {
+      s[["function"]] <- NULL
+      write.dcf(s, txt_con)
+      cat("\n", file = txt_con)
+    })
+    close(txt_con)
+    txt
   })
-  close(txt_con)
-  txt
 }
 
 write_addins <- function(x) {
