@@ -1,0 +1,23 @@
+Package: shrtcts
+Title: Make Anything an RStudio Shortcut
+Version: 0.0.1
+Authors@R: 
+    person(given = "Garrick",
+           family = "Aden-Buie",
+           role = c("aut", "cre"),
+           email = "garrick@adenbuie.com",
+           comment = c(ORCID = "0000-0002-7111-0077"))
+Description: An easily customizable method for creating RStudio
+    addins from arbitrary R code. Use your own functions or call functions from
+    other packages. Your shortcuts are stored in a YAML file in your home 
+    directory.
+License: MIT + file LICENSE
+Imports: 
+    fs,
+    yaml
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.2
+URL: https://github.com/gadenbuie/shrtcts
+BugReports: https://github.com/gadenbuie/shrtcts/issues

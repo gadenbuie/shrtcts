@@ -1,0 +1,20 @@
+- Name: 10 random numbers
+  Binding: function() { runif(10, 0, 10) }
+- Name: Say Something Nice
+  id: 97
+  Description: A demo of cool things
+  Binding: praise::praise
+  Interactive: true
+- Name: Remind me where I am
+  Binding: |
+    function() {
+      message("Working directory: ", getwd())
+    }
+  Interactive: false
+- Name: A Random Number Between 0 and 1
+  Description: Another demo
+  Binding: |
+    function() {
+      runif(1, 0, 1)
+    }
+  Interactive: true
