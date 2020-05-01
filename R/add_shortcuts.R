@@ -151,6 +151,9 @@ parse_shortcuts_yaml <- function(path) {
 
 add_shortcut_ids <- function(x) {
   declared_ids <- as.integer(unlist(lapply(x, `[[`, "id")))
+  if (any(is.na(declared_ids))) {
+    stop("Shortcuts must have integer ids", call. = FALSE)
+  }
   if (any(duplicated(declared_ids))) {
     dups <- unique(declared_ids[duplicated(declared_ids)])
     warning(
