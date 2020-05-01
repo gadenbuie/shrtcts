@@ -10,7 +10,15 @@ run_shortcut <- function(n) {
 
 shortcut_by_id <- function(shortcuts, id) {
   ids <- vapply(shortcuts, `[[`, integer(1), "id")
-  shortcuts[[which(id == ids)]][["function"]]
+  this_id <- which(id == ids)
+  if (!length(this_id)) {
+    stop("No shortcut registered with id ", id, call. = FALSE)
+  }
+  if (length(this_id) > 1) {
+    warning("Multiple shortcuts registered with id ", id, ", using first.",
+            call. = FALSE, immediate. = TRUE)
+  }
+  shortcuts[[this_id[[1]]]][["function"]]
 }
 
 shortcut_01 <- function() run_shortcut(n = 1)

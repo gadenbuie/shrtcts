@@ -147,6 +147,15 @@ parse_shortcuts_yaml <- function(path) {
 
 add_shortcut_ids <- function(x) {
   declared_ids <- as.integer(unlist(lapply(x, `[[`, "id")))
+  if (any(duplicated(declared_ids))) {
+    dups <- unique(declared_ids[duplicated(declared_ids)])
+    warning(
+      "Multiple shortcuts have the same id: ",
+      paste(dups, collapse = ", "),
+      call. = FALSE,
+      immediate. = TRUE
+    )
+  }
   ids <- c()
   i <- 1L
   for (idx in seq_along(x)) {
