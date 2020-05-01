@@ -1,4 +1,4 @@
-### RStudio Keyboard Shortcuts
+## RStudio Keyboard Shortcuts
 
 Once you've setup an RStudio Addin via
 `shrtcts`, you can create a keyboard shortcut for the addin using the

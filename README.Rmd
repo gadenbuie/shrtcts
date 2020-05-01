@@ -61,8 +61,6 @@ you could also just run `shrtcts::add_rstudio_shortcuts()`
 whenever you update the YAML file
 instead of adding the above code to your `~/.Rprofile`.
 
-## Details
-
 ```{r child="man/fragments/shrtcts-yaml-format.Rmd"}
 ```
 

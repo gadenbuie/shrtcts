@@ -1,4 +1,4 @@
-### shrtcts YAML format
+## shrtcts YAML format
 
 Use the following template to organize your
 `.shrtcts.yaml`. Each shortcut is a YAML list item with the following

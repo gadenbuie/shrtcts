@@ -47,9 +47,7 @@ If you store your `.shrtcts.yaml` file in your home directory, you could
 also just run `shrtcts::add_rstudio_shortcuts()` whenever you update the
 YAML file instead of adding the above code to your `~/.Rprofile`.
 
-## Details
-
-### shrtcts YAML format
+## shrtcts YAML format
 
 Use the following template to organize your `.shrtcts.yaml`. Each
 shortcut is a YAML list item with the following structure:
@@ -100,7 +98,7 @@ shortcuts remain the same.
       Binding: beepr::beep()
       id: 42
 
-### RStudio Keyboard Shortcuts
+## RStudio Keyboard Shortcuts
 
 Once you’ve setup an RStudio Addin via `shrtcts`, you can create a
 keyboard shortcut for the addin using the *Tools* \> *Modify keyboard
