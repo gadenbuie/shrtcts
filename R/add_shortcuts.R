@@ -9,7 +9,8 @@
 #' can set their names and even assign keyboard shortcuts to your shrtcts.
 #'
 #' @section YAML format: Use the following template to organize your
-#' `.shrtcts.yaml`.
+#' `.shrtcts.yaml`. Each shortcut is a YAML list item with the following
+#' structure:
 #'
 #' ```yaml
 #' - Name: Say Something Nice
@@ -20,31 +21,37 @@
 #'
 #' This format follows the format used by RStudio in the `addins.dcf` file. The
 #' minimum required fields are `Name` and `Binding`. Use the
-#' `example_shortcuts_yaml()` function to see an example YAML file.
+#' `example_shortcuts_yaml()` function to see a complete example YAML file.
 #'
 #' Note that unlike the `addins.dcf` file format, in `.shrtcts.yaml`, the
-#' `Binding` field is an R function. If calling a function in another package,
-#' you can simply set to the function name, as in the above example. Otherwise,
-#' you can write your own unnamed function.
+#' `Binding` field is an R function or arbitrary R code. If your shortcut calls
+#' a function in another package, you can simply set `Binding` to the function
+#' name, as in the example above. Otherwise, you can use a multi-line literal-
+#' style YAML block to write your R code:
 #'
 #' ```yaml
 #' - Name: Remind me where I am
 #'   Binding: |
-#'     function() {
-#'       message("Working directory: ", getwd())
-#'     }
+#'     current_directory <- getwd()
+#'     message("Working directory: ", current_directory)
 #'   Interactive: false
 #' ```
 #'
 #' Note that when `Interactive` is `false`, no output will be shown unless you
-#' explicitly call a `print()` or similar function.
+#' explicitly call a `print()` or a similar function.
 #'
-#' The order of the shortcuts is important. There are 100 "slots" RStudio addins
-#' available in \pkg{shrtcts}. Changing the order of the shortcuts in the YAML
-#' file will change the helper function called by the addin, which will break
-#' keyboard shortcuts if set up. You can specifically set the id of any shortcut
-#' to a number between 1 and 100, to ensure that keyboard shortcuts remain
-#' the same.
+#' Save your shortcuts YAML file to `.config/.shrtcts.yaml` or `.shrtcts.yaml`
+#' in your home directory (i.e. [fs::path_home_r()] or [fs::path_home()]),
+#' and run `add_rstudio_shortcuts()` to install your shortcuts. You'll need to
+#' restart your R session for RStudio to learn your shortcuts.
+#'
+#' Once RStudio has learned about your shortcuts, you can create keyboard
+#' shortcuts to trigger each action. Note that the order of the shortcuts in
+#' your YAML file is important. \pkg{shrtcts} comes with are 100 "slots" for
+#' RStudio addins. Changing the order of the shortcuts in the YAML file will
+#' change which slot is used for each shortcut, which could break your keyboard
+#' shortcuts. To avoid this, specifically set the id of any shortcut to a
+#' number between 1 and 100, to ensure that keyboard shortcuts remain the same.
 #'
 #' ```
 #' - Name: Make A Noise
@@ -72,7 +79,7 @@
 #' @examples
 #' # Add shortcuts to ~/.shrtcts.yaml (see help above)
 #'
-#' # Add this to your ~/.Rprofile
+#' # Add this to your ~/.Rprofile to automatically load shortcuts
 #' if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
 #'   shrtcts::add_rstudio_shortcuts()
 #' }
