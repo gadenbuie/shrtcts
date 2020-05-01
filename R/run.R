@@ -3,13 +3,11 @@ run_shortcut <- function(n) {
   if (is.null(path)) path <- find_shortcuts_yaml()
 
   shortcuts <- parse_shortcuts_yaml(path)
-  if (!length(shortcuts)) return(invisible())
-  shortcut <- eval(parse(text = shortcut_by_id(shortcuts, n)))
-  if (is.function(shortcut)) {
-    shortcut()
-  } else {
-    shortcut
+  if (!length(shortcuts)) {
+    return(invisible())
   }
+  fn <- eval(parse(text = shortcut_by_id(shortcuts, n)))
+  fn()
 }
 
 shortcut_by_id <- function(shortcuts, id) {
@@ -19,8 +17,13 @@ shortcut_by_id <- function(shortcuts, id) {
     stop("No shortcut registered with id ", id, call. = FALSE)
   }
   if (length(this_id) > 1) {
-    warning("Multiple shortcuts registered with id ", id, ", using first.",
-            call. = FALSE, immediate. = TRUE)
+    warning(
+      "Multiple shortcuts registered with id ",
+      id,
+      ", using first.",
+      call. = FALSE,
+      immediate. = TRUE
+    )
   }
   shortcuts[[this_id[[1]]]][["function"]]
 }

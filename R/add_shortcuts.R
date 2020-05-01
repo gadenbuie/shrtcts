@@ -8,68 +8,9 @@
 #' be arbitrary functions written inline or functions from other packages. You
 #' can set their names and even assign keyboard shortcuts to your shrtcts.
 #'
-#' @section YAML format: Use the following template to organize your
-#' `.shrtcts.yaml`. Each shortcut is a YAML list item with the following
-#' structure:
+#' @includeRmd man/fragments/shrtcts-yaml-format.Rmd
 #'
-#' ```yaml
-#' - Name: Say Something Nice
-#'   Description: A demo of cool things
-#'   Binding: praise::praise
-#'   Interactive: true
-#' ```
-#'
-#' This format follows the format used by RStudio in the `addins.dcf` file. The
-#' minimum required fields are `Name` and `Binding`. Use the
-#' `example_shortcuts_yaml()` function to see a complete example YAML file.
-#'
-#' Note that unlike the `addins.dcf` file format, in `.shrtcts.yaml`, the
-#' `Binding` field is an R function or arbitrary R code. If your shortcut calls
-#' a function in another package, you can simply set `Binding` to the function
-#' name, as in the example above. Otherwise, you can use a multi-line literal-
-#' style YAML block to write your R code:
-#'
-#' ```yaml
-#' - Name: Remind me where I am
-#'   Binding: |
-#'     current_directory <- getwd()
-#'     message("Working directory: ", current_directory)
-#'   Interactive: false
-#' ```
-#'
-#' Note that when `Interactive` is `false`, no output will be shown unless you
-#' explicitly call a `print()` or a similar function.
-#'
-#' Save your shortcuts YAML file to `.config/.shrtcts.yaml` or `.shrtcts.yaml`
-#' in your home directory (i.e. [fs::path_home_r()] or [fs::path_home()]),
-#' and run `add_rstudio_shortcuts()` to install your shortcuts. You'll need to
-#' restart your R session for RStudio to learn your shortcuts.
-#'
-#' Once RStudio has learned about your shortcuts, you can create keyboard
-#' shortcuts to trigger each action. Note that the order of the shortcuts in
-#' your YAML file is important. \pkg{shrtcts} comes with are 100 "slots" for
-#' RStudio addins. Changing the order of the shortcuts in the YAML file will
-#' change which slot is used for each shortcut, which could break your keyboard
-#' shortcuts. To avoid this, specifically set the id of any shortcut to a
-#' number between 1 and 100, to ensure that keyboard shortcuts remain the same.
-#'
-#' ```
-#' - Name: Make A Noise
-#'   Binding: beepr::beep()
-#'   id: 42
-#' ```
-#'
-#' @section RStudio Keyboard Shortcuts: Once you've setup an RStudio Addin via
-#' \pkg{shrtcts}, you can create a keyboard shortcut for the addin using the
-#' _Tools_ > _Modify keyboard shortcuts_ menu.
-#'
-#' If you create a shortcut for an addin via \pkg{shrtcts}, it's a good idea to
-#' set the `id` of the shortcut (see the section above).
-#'
-#' Keyboard shortcuts persist even if you update the list of shortcuts, but
-#' re-installing the \pkg{shrtcts} package will break any previously-installed
-#' shortcuts. As far as I know, there's no way to save and restore these
-#' shortcuts, so use caution.
+#' @includeRmd man/fragments/rstudio-keyboard-shortcuts.Rmd
 #'
 #' @param path The path to your `.shtrcts.yaml` file. If `NULL`, \pkg{shrtcts}
 #'   will look in your R or OS home directory (via [fs::path_home_r()] or

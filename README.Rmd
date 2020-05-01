@@ -1,0 +1,65 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# shrtcts
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+**shrtcts** lets you make anything an RStudio shortcut!
+
+## Installation
+
+You can install the `shrtcts` from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("gadenbuie/shrtcts")
+```
+
+## Quick Intro
+
+Store your shortcuts in `~/.config/.shrtcts.yaml` or `~/.shrtcts.yaml`.
+Each shortcut should look something like the example below,
+but you can include _any R code you want_ as the shortcut `Binding`.
+
+```yaml
+- Name: Say Something Nice
+  Description: A demo of cool things
+  Binding: praise::praise
+  Interactive: true
+```
+
+Then add this to your `~/.Rprofile` 
+(use `usethis::edit_r_profile()` to find this file quickly).
+
+```{r eval=FALSE}
+if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
+  shrtcts::add_rstudio_shortcuts()
+}
+```
+
+After restarting  your R session, 
+you'll find your new shortcut
+**Say Something Nice**
+in your RStudio Addins menu!
+
+## Details
+
+```{r child="man/fragments/shrtcts-yaml-format.Rmd"}
+```
+
+```{r child="man/fragments/rstudio-keyboard-shortcuts.Rmd"}
+```

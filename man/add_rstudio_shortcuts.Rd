@@ -24,68 +24,72 @@ starting R. Your shortcuts will automatically appear in the Addins window
 be arbitrary functions written inline or functions from other packages. You
 can set their names and even assign keyboard shortcuts to your shrtcts.
 }
-\section{Functions}{
-\itemize{
-\item \code{example_shortcuts_yaml}: An example \code{.shrtcts.yml} file.
-}}
+\details{
+\subsection{shrtcts YAML format}{
 
-\section{YAML format}{
- Use the following template to organize your
-\code{.shrtcts.yaml}. Each shortcut is a YAML list item with the following
-structure:\if{html}{\out{<div class="yaml">}}\preformatted{- Name: Say Something Nice
+Use the following template to organize your \code{.shrtcts.yaml}. Each
+shortcut is a YAML list item with the following structure:\if{html}{\out{<div class="yaml">}}\preformatted{- Name: Say Something Nice
   Description: A demo of cool things
   Binding: praise::praise
   Interactive: true
 }\if{html}{\out{</div>}}
 
-This format follows the format used by RStudio in the \code{addins.dcf} file. The
-minimum required fields are \code{Name} and \code{Binding}. Use the
+This format follows the format used by RStudio in the \code{addins.dcf} file.
+The minimum required fields are \code{Name} and \code{Binding}. Use the
 \code{example_shortcuts_yaml()} function to see a complete example YAML file.
-
 Note that unlike the \code{addins.dcf} file format, in \code{.shrtcts.yaml}, the
-\code{Binding} field is an R function or arbitrary R code. If your shortcut calls
-a function in another package, you can simply set \code{Binding} to the function
-name, as in the example above. Otherwise, you can use a multi-line literal-
-style YAML block to write your R code:\if{html}{\out{<div class="yaml">}}\preformatted{- Name: Remind me where I am
+\code{Binding} field is an R function or arbitrary R code. If your shortcut
+calls a function in another package, you can simply set \code{Binding} to the
+function name, as in the example above. Otherwise, you can use a
+multi-line literal- style YAML block to write your R code:\if{html}{\out{<div class="yaml">}}\preformatted{- Name: Remind me where I am
   Binding: |
     current_directory <- getwd()
     message("Working directory: ", current_directory)
   Interactive: false
 }\if{html}{\out{</div>}}
 
-Note that when \code{Interactive} is \code{false}, no output will be shown unless you
-explicitly call a \code{print()} or a similar function.
+Note that when \code{Interactive} is \code{false}, no output will be shown unless
+you explicitly call a \code{print()} or a similar function.
 
-Save your shortcuts YAML file to \code{.config/.shrtcts.yaml} or \code{.shrtcts.yaml}
-in your home directory (i.e. \code{\link[fs:path_home_r]{fs::path_home_r()}} or \code{\link[fs:path_home]{fs::path_home()}}),
-and run \code{add_rstudio_shortcuts()} to install your shortcuts. You'll need to
+Save your shortcuts YAML file to \code{.config/.shrtcts.yaml} or
+\code{.shrtcts.yaml} in your home directory
+(i.e. \code{\link[fs:path_home_r]{fs::path_home_r()}} or
+\code{\link[fs:path_home]{fs::path_home()}}), and run
+\code{add_rstudio_shortcuts()} to install your shortcuts. You’ll need to
 restart your R session for RStudio to learn your shortcuts.
 
 Once RStudio has learned about your shortcuts, you can create keyboard
-shortcuts to trigger each action. Note that the order of the shortcuts in
-your YAML file is important. \pkg{shrtcts} comes with are 100 "slots" for
-RStudio addins. Changing the order of the shortcuts in the YAML file will
-change which slot is used for each shortcut, which could break your keyboard
-shortcuts. To avoid this, specifically set the id of any shortcut to a
-number between 1 and 100, to ensure that keyboard shortcuts remain the same.\preformatted{- Name: Make A Noise
+shortcuts to trigger each action. Note that the order of the shortcuts
+in your YAML file is important. \code{shrtcts} comes with are 100 “slots” for
+RStudio addins. Changing the order of the shortcuts in the YAML file
+will change which slot is used for each shortcut, which could break your
+keyboard shortcuts. To avoid this, specifically set the id of any
+shortcut to a number between 1 and 100, to ensure that keyboard
+shortcuts remain the same.\preformatted{- Name: Make A Noise
   Binding: beepr::beep()
   id: 42
 }
 }
 
-\section{RStudio Keyboard Shortcuts}{
- Once you've setup an RStudio Addin via
-\pkg{shrtcts}, you can create a keyboard shortcut for the addin using the
-\emph{Tools} > \emph{Modify keyboard shortcuts} menu.
+\subsection{RStudio Keyboard Shortcuts}{
 
-If you create a shortcut for an addin via \pkg{shrtcts}, it's a good idea to
+Once you’ve setup an RStudio Addin via \code{shrtcts}, you can create a
+keyboard shortcut for the addin using the \emph{Tools} > \emph{Modify keyboard
+shortcuts} menu.
+
+If you create a shortcut for an addin via \code{shrtcts}, it’s a good idea to
 set the \code{id} of the shortcut (see the section above).
 
 Keyboard shortcuts persist even if you update the list of shortcuts, but
-re-installing the \pkg{shrtcts} package will break any previously-installed
-shortcuts. As far as I know, there's no way to save and restore these
+re-installing the \code{shrtcts} package will break any previously-installed
+shortcuts. As far as I know, there’s no way to save and restore these
 shortcuts, so use caution.
 }
+}
+\section{Functions}{
+\itemize{
+\item \code{example_shortcuts_yaml}: An example \code{.shrtcts.yml} file.
+}}
 
 \examples{
 # Add shortcuts to ~/.shrtcts.yaml (see help above)

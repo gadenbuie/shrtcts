@@ -1,0 +1,13 @@
+### RStudio Keyboard Shortcuts
+
+Once you've setup an RStudio Addin via
+`shrtcts`, you can create a keyboard shortcut for the addin using the
+_Tools_ > _Modify keyboard shortcuts_ menu.
+
+If you create a shortcut for an addin via `shrtcts`, it's a good idea to
+set the `id` of the shortcut (see the section above).
+
+Keyboard shortcuts persist even if you update the list of shortcuts, but
+re-installing the `shrtcts` package will break any previously-installed
+shortcuts. As far as I know, there's no way to save and restore these
+shortcuts, so use caution.
