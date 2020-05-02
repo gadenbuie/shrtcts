@@ -5,10 +5,16 @@
   Description: A demo of cool things
   Binding: praise::praise
   Interactive: true
-- Name: Remind me where I am
+- Name: New Temporary R Markdown Document
   Binding: |
-    current_dir = getwd()
-    message("Working directory: ", current_dir)
+    tmp <- tempfile(fileext = ".Rmd")
+    rmarkdown::draft(
+      tmp,
+      template = "github_document",
+      package = "rmarkdown",
+      edit = FALSE
+    )
+    rstudioapi::navigateToFile(tmp)
   Interactive: false
 - Name: A Random Number Between 0 and 1
   Description: Another demo
