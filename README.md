@@ -31,10 +31,12 @@ include *any R code you want* as the shortcut `Binding`.
   Interactive: true
 ```
 
-Then add this to your `~/.Rprofile` (use `usethis::edit_r_profile()` to
-find this file quickly).
+Then add this to your `~/.Rprofile` , which you can find quickly with
+`usethis::edit_r_profile()`. (Or you can skip this step and run
+`add_rstudio_shortcuts()` whenever you update your shortcuts.)
 
 ``` r
+# ~/.Rprofile
 if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
   shrtcts::add_rstudio_shortcuts()
 }
@@ -42,6 +44,12 @@ if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
 
 After restarting your R session, you’ll find your new shortcut **Say
 Something Nice** in your RStudio Addins menu\!
+
+<center>
+
+<img src="man/figures/addin-nice.png" width="330px"/>
+
+</center>
 
 If you store your `.shrtcts.yaml` file in your home directory, you could
 also just run `shrtcts::add_rstudio_shortcuts()` whenever you update the
