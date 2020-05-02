@@ -74,7 +74,7 @@ Note that unlike the `addins.dcf` file format, in `.shrtcts.yaml`, the
 `Binding` field is an R function or arbitrary R code. If your shortcut
 calls a function in another package, you can simply set `Binding` to the
 function name, as in the example above. Otherwise, you can use a
-multi-line literal- style YAML block to write your R code:
+multi-line literal-style YAML block to write your R code:
 
 ``` yaml
 - Name: New Temporary R Markdown Document
@@ -94,10 +94,11 @@ Note that when `Interactive` is `false`, no output will be shown unless
 you explicitly call a `print()` or a similar function.
 
 Save your shortcuts YAML file to `.config/.shrtcts.yaml` or
-`.shrtcts.yaml` in your home directory (i.e. \[fs::path\_home\_r()\] or
-\[fs::path\_home()\]), and run `add_rstudio_shortcuts()` to install your
-shortcuts. You’ll need to restart your R session for RStudio to learn
-your shortcuts.
+`.shrtcts.yaml` in your home directory —
+i.e. [fs::path\_home\_r()](https://fs.r-lib.org/reference/path_expand.html)
+or [fs::path\_home()](https://fs.r-lib.org/reference/path_expand.html) —
+and run `add_rstudio_shortcuts()` to install your shortcuts. You’ll need
+to restart your R session for RStudio to learn your shortcuts.
 
 Once RStudio has learned about your shortcuts, you can create keyboard
 shortcuts to trigger each action. Note that the order of the shortcuts

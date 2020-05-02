@@ -71,3 +71,6 @@ instead of adding the above code to your `~/.Rprofile`.
 
 ```{r child="man/fragments/rstudio-keyboard-shortcuts.Rmd"}
 ```
+
+[fs::path_home_r()]: https://fs.r-lib.org/reference/path_expand.html
+[fs::path_home()]: https://fs.r-lib.org/reference/path_expand.html
