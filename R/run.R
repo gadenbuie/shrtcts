@@ -6,8 +6,12 @@ run_shortcut <- function(n) {
   if (!length(shortcuts)) {
     return(invisible())
   }
-  fn <- eval(parse(text = shortcut_by_id(shortcuts, n)))
-  fn()
+  shortcut <- eval(parse(text = shortcut_by_id(shortcuts, n)))
+  if (is.function(shortcut)) {
+    shortcut()
+  } else {
+    shortcut
+  }
 }
 
 shortcut_by_id <- function(shortcuts, id) {
