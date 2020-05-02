@@ -41,10 +41,16 @@ Note that unlike the \code{addins.dcf} file format, in \code{.shrtcts.yaml}, the
 \code{Binding} field is an R function or arbitrary R code. If your shortcut
 calls a function in another package, you can simply set \code{Binding} to the
 function name, as in the example above. Otherwise, you can use a
-multi-line literal- style YAML block to write your R code:\if{html}{\out{<div class="yaml">}}\preformatted{- Name: Remind me where I am
+multi-line literal- style YAML block to write your R code:\if{html}{\out{<div class="yaml">}}\preformatted{- Name: New Temporary R Markdown Document
   Binding: |
-    current_directory <- getwd()
-    message("Working directory: ", current_directory)
+    tmp <- tempfile(fileext = ".Rmd")
+    rmarkdown::draft(
+      tmp,
+      template = "github_document",
+      package = "rmarkdown",
+      edit = FALSE
+    )
+    rstudioapi::navigateToFile(tmp)
   Interactive: false
 }\if{html}{\out{</div>}}
 

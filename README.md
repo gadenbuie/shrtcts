@@ -77,10 +77,16 @@ function name, as in the example above. Otherwise, you can use a
 multi-line literal- style YAML block to write your R code:
 
 ``` yaml
-- Name: Remind me where I am
+- Name: New Temporary R Markdown Document
   Binding: |
-    current_directory <- getwd()
-    message("Working directory: ", current_directory)
+    tmp <- tempfile(fileext = ".Rmd")
+    rmarkdown::draft(
+      tmp,
+      template = "github_document",
+      package = "rmarkdown",
+      edit = FALSE
+    )
+    rstudioapi::navigateToFile(tmp)
   Interactive: false
 ```
 
