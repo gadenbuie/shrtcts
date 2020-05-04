@@ -60,7 +60,7 @@ find_shortcuts_yaml <- function() {
     fs::path_home(c(".config", ""))
   )
   try_dirs <- unique(try_dirs)
-  dir <- try_dirs[fs::dir_exists(try_dirs)][1]
+  dir <- try_dirs[fs::dir_exists(try_dirs)]
   if (!length(dir)) cant_find_shortcuts_yaml()
 
   path <- fs::dir_ls(dir, regexp = "[.]shrtcts[.]ya?ml", all = TRUE)
