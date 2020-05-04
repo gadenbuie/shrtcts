@@ -1,0 +1,24 @@
+[rsam]: https://github.com/yonicd/rsam
+
+shrtcts was inspired by [rsam],
+the _RStudio Addins Manager_ by [&commat;yonicd](https://github.com/yonicd).
+There's a lot that rsam can do ---
+including helping you manage your keyboard shortcuts ---
+and shrtcts is essentially an extension of rsam's
+[limited liability addins](https://github.com/yonicd/rsam#limited-liability-addins).
+rsam provides three slots for custom addins
+that in turn look for specially-named functions defined in the global environment.
+In the addins menu,
+these three custom addins appear as
+**lla1**, **lla2**, and **lla3**.
+The upside of rsam
+is that you don't have to write code in YAML (huge plus!),
+but the downside is that the names of the addins are fixed.
+
+shrtcts,
+on the other hand,
+rewrites its own addin registry so that you can have customized addin names and descriptions.
+In both packages,
+the number of custom addins is limited:
+rsam provides 3 slots,
+while shrtcts gives you 100.

@@ -4,6 +4,7 @@
 .RData
 .DS_Store
 README.html
+man/fragments/*.html
 
 # vscode
 .history/
