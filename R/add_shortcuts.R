@@ -143,6 +143,9 @@ add_shortcut_ids <- function(x) {
 as_dcf <- function(x) {
   txt_con <- textConnection("txt", "w", local = TRUE)
   lapply(x, function(s) {
+    if (is_packaged_fn(s[["function"]])) {
+      s[["Interactive"]] <- FALSE
+    }
     s[["function"]] <- NULL
     write.dcf(s, txt_con)
     cat("\n", file = txt_con)
@@ -156,4 +159,10 @@ write_addins <- function(x) {
   outdir <- fs::path(system.file(package = "shrtcts"), "rstudio")
   fs::dir_create(outdir)
   writeLines(x, fs::path(outdir, "addins.dcf"))
+}
+
+is_packaged_fn <- function(f_text) {
+  length(f_text) == 1 &&
+    !grepl("\n", f_text) &&
+    grepl("^[a-zA-Z][a-zA-Z0-9.]+[:]{2,3}\\w+$", f_text)
 }

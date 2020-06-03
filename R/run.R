@@ -6,7 +6,20 @@ run_shortcut <- function(n) {
   if (!length(shortcuts)) {
     return(invisible())
   }
-  shortcut <- eval(parse(text = shortcut_by_id(shortcuts, n)))
+  this_shortcut <- shortcut_by_id(shortcuts, n)
+  if (
+    isTRUE(this_shortcut[["Interactive"]]) &&
+    is_packaged_fn(this_shortcut[["function"]]) &&
+    can_send_to_console()
+  ) {
+    rstudioapi::sendToConsole(
+      code = paste0(this_shortcut[["function"]], "()"),
+      execute = TRUE,
+      focus = TRUE
+    )
+    return(invisible())
+  }
+  shortcut <- eval(parse(text = this_shortcut[["function"]]))
   if (is.function(shortcut)) {
     shortcut()
   } else {
@@ -29,7 +42,12 @@ shortcut_by_id <- function(shortcuts, id) {
       immediate. = TRUE
     )
   }
-  shortcuts[[this_id[[1]]]][["function"]]
+  shortcuts[[this_id[[1]]]]
+}
+
+can_send_to_console <- function() {
+  if (!requireNamespace("rstudioapi", quietly = TRUE)) return(FALSE)
+  rstudioapi::hasFun("sendToConsole")
 }
 
 shortcut_01 <- function() run_shortcut(n = 1)
