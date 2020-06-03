@@ -117,7 +117,7 @@ add_shortcut_ids <- function(x) {
     )
   }
   if (any(declared_ids > 100)) {
-    bad <- unqiue(declared_ids[declared_ids > 100])
+    bad <- unique(declared_ids[declared_ids > 100])
     stop(
       "Shortcuts with id > 100 will not work: ",
       paste(bad, collapse = ", "),
