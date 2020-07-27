@@ -1,6 +1,6 @@
 run_shortcut <- function(n) {
   path <- getOption("shrtcts.path", NULL)
-  if (is.null(path)) path <- find_shortcuts_yaml()
+  if (is.null(path)) path <- path_shortcuts_yaml()
 
   shortcuts <- parse_shortcuts_yaml(path)
   if (!length(shortcuts)) {

@@ -28,18 +28,13 @@
 #' @export
 add_rstudio_shortcuts <- function(path = NULL) {
   if (!interactive()) return(invisible())
-  if (is.null(path)) {
-    path <- getOption("shrtcts.path", NULL)
-  } else {
-    path <- fs::path_norm(path)
-    if (!fs::file_exists(path)) {
-      stop("shrtcts file does not exist: ", path, call. = FALSE)
-    }
-    options("shrtcts.path" = path)
-  }
-  if (is.null(path)) path <- find_shortcuts_yaml()
+
+  path <- locate_shortcuts_yaml(path)
+
   shortcuts <- parse_shortcuts_yaml(path)
+
   if (!length(shortcuts)) return(invisible())
+
   write_addins(shortcuts)
   invisible()
 }
@@ -52,24 +47,63 @@ example_shortcuts_yaml <- function() {
   invisible(x)
 }
 
+#' Open the shrtcts Source File
+#'
+#' This helper function locates and opens (or returns the path to) the
+#' `.shrtcts.yml` file.
+#'
+#' @param open If `TRUE` and the `.shrtcts.yml` file is found, then the file is
+#'   opened via `file.edit()`. Otherwise, the path is returned.
+#' @inheritParams add_rstudio_shortcuts
+#'
+#' @return The path to the `.shrtcts.yml` source file (invisibly if the file is
+#'   opened).
+#'
+#' @export
+edit_shortcuts <- function(open = TRUE, path = NULL) {
+  path <- locate_shortcuts_yaml(path)
+  if (isTRUE(open)) {
+    file.edit(as.character(path))
+    invisible(path)
+  } else {
+    path
+  }
+}
+
 how_to_use <- function() `?`(shrtcts::add_rstudio_shortcuts)
 
-find_shortcuts_yaml <- function() {
+locate_shortcuts_yaml <- function(path = NULL) {
+  if (is.null(path)) {
+    path <- getOption("shrtcts.path", NULL)
+  } else {
+    path <- fs::path_norm(path)
+    if (!fs::file_exists(path)) {
+      stop("shrtcts file does not exist: ", path, call. = FALSE)
+    }
+    options("shrtcts.path" = path)
+  }
+  if (is.null(path)) path <- path_shortcuts_yaml()
+  path
+}
+
+how_to_use <- function() `?`(shrtcts::add_rstudio_shortcuts)
+
+path_shortcuts_yaml <- function() {
   try_dirs <- c(
     fs::path_home_r(c(".config", "")),
     fs::path_home(c(".config", ""))
   )
   try_dirs <- unique(try_dirs)
   dir <- try_dirs[fs::dir_exists(try_dirs)]
-  if (!length(dir)) cant_find_shortcuts_yaml()
+  if (!length(dir)) cant_path_shortcuts_yaml()
 
   path <- fs::dir_ls(dir, regexp = "[.]shrtcts[.]ya?ml", all = TRUE)
-  if (!length(path)) cant_find_shortcuts_yaml()
+  if (!length(path)) cant_path_shortcuts_yaml()
 
   path[1]
 }
 
-cant_find_shortcuts_yaml <- function() {
+cant_path_shortcuts_yaml <- function() {
   stop(
     "Could not find .shrtcts.yaml in ",
     fs::path_home_r(".config"),
