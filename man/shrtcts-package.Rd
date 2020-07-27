@@ -7,9 +7,9 @@
 \title{shrtcts: Make Anything an RStudio Shortcut}
 \description{
 An easily customizable method for creating RStudio
-    addins from arbitrary R code. Use your own functions or call functions from
-    other packages. Your shortcuts are stored in a YAML file in your home 
-    directory.
+    addins from arbitrary R code. Use your own functions or call functions
+    from other packages. Your shortcuts are stored in a YAML file in your
+    home directory.
 }
 \seealso{
 Useful links:

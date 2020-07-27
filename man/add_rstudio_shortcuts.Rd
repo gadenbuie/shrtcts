@@ -11,8 +11,8 @@ example_shortcuts_yaml()
 }
 \arguments{
 \item{path}{The path to your \code{.shtrcts.yaml} file. If \code{NULL}, \pkg{shrtcts}
-will look in your R or OS home directory (via \code{\link[fs:path_home_r]{fs::path_home_r()}} or
-\code{\link[fs:path_home]{fs::path_home()}}). You can set this path via the global option
+will look in your R or OS home directory (via \code{\link[fs:path_expand]{fs::path_home_r()}} or
+\code{\link[fs:path_expand]{fs::path_home()}}). You can set this path via the global option
 \code{"shrtcts.path"}.}
 }
 \description{
@@ -59,8 +59,8 @@ you explicitly call a \code{print()} or a similar function.
 
 Save your shortcuts YAML file to \code{.config/.shrtcts.yaml} or
 \code{.shrtcts.yaml} in your home directory —
-i.e. \code{\link[fs:path_home_r]{fs::path_home_r()}} or
-\code{\link[fs:path_home]{fs::path_home()}} — and run
+i.e. \code{\link[fs:path_expand]{fs::path_home_r()}} or
+\code{\link[fs:path_expand]{fs::path_home()}} — and run
 \code{add_rstudio_shortcuts()} to install your shortcuts. You’ll need to
 restart your R session for RStudio to learn your shortcuts.
 
