@@ -1,7 +1,8 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # shrtcts
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgadenbuie%2Fshrtcts.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgadenbuie%2Fshrtcts?ref=badge_shield)
+
 
 <!-- badges: start -->
 
@@ -146,3 +147,7 @@ shrtcts, on the other hand, rewrites its own addin registry so that you
 can have customized addin names and descriptions. In both packages, the
 number of custom addins is limited: rsam provides 3 slots, while shrtcts
 gives you 100.
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgadenbuie%2Fshrtcts.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgadenbuie%2Fshrtcts?ref=badge_large)
