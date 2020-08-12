@@ -6,12 +6,14 @@
 \alias{locate_addins_json}
 \title{Paths Used by shrtcts}
 \usage{
-locate_shortcuts_source(path = NULL)
+locate_shortcuts_source(path = NULL, all = FALSE)
 
-locate_addins_json(path = NULL)
+locate_addins_json(path = NULL, all = FALSE)
 }
 \arguments{
 \item{path}{The path to the file.}
+
+\item{all}{List all found files, otherwise only the first is returned.}
 }
 \description{
 These functions help locate the paths used by \pkg{shrtcts} when looking for

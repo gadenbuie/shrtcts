@@ -23,6 +23,7 @@
 #' }
 #'
 #' @param path The path to the file.
+#' @param all List all found files, otherwise only the first is returned.
 #' @name paths
 NULL
 
@@ -31,7 +32,7 @@ NULL
 
 #' @describeIn paths Find the path to `.shrtcts.R` or `.shrtcts.yml`.
 #' @export
-locate_shortcuts_source <- function(path = NULL) {
+locate_shortcuts_source <- function(path = NULL, all = FALSE) {
   if (is.null(path)) {
     path <- getOption("shrtcts.path", NULL)
   } else {
@@ -41,7 +42,16 @@ locate_shortcuts_source <- function(path = NULL) {
     }
     options("shrtcts.path" = path)
   }
-  if (is.null(path)) path <- path_shortcuts_source()
+  if (is.null(path)) {
+    path <- path_shortcuts_source()
+  }
+  if (isTRUE(all)) {
+    return(path)
+  }
+  if (length(path) > 1) {
+    message("[shrtcts] Multiple {shrtcts} source files found, using ", path[[1]])
+    path <- path[[1]]
+  }
   path
 }
 
@@ -60,11 +70,8 @@ path_shortcuts_source <- function() {
   paths <- c(path_r, path_yaml)
 
   if (!length(paths)) cant_path_shortcuts_source()
-  if (length(paths) > 1) {
-    message("[shrtcts] Multiple {shrtcts} source files found, using ", paths[1])
-  }
 
-  unname(paths[1])
+  unname(paths)
 }
 
 cant_path_shortcuts_source <- function() {
@@ -83,7 +90,7 @@ cant_path_shortcuts_source <- function() {
 #' @describeIn paths Find the path to `addins.json`, the RStudio configuration
 #'   file containing keyboard shortcuts for addins
 #' @export
-locate_addins_json <- function(path = NULL) {
+locate_addins_json <- function(path = NULL, all = FALSE) {
   if (is.null(path)) {
     path <- getOption("shrtcts.addins_json", NULL)
   } else {
@@ -94,6 +101,13 @@ locate_addins_json <- function(path = NULL) {
   }
   if (is.null(path)) {
     path <- path_addins_json()
+  }
+  if (isTRUE(all)) {
+    return(path)
+  }
+  if (length(path) > 1) {
+    message("[shrtcts] Multiple 'addins.json' files found, using ", path[[1]])
+    path <- path[[1]]
   }
   path
 }
@@ -113,11 +127,8 @@ path_addins_json <- function() {
   paths <- fs::dir_ls(dir, regexp = "addins[.]json$", all = TRUE)
 
   if (!length(paths)) cant_path_addins_json()
-  if (length(paths) > 1) {
-    message("[shrtcts] Multiple {shrtcts} source files found, using ", paths[1])
-  }
 
-  unname(paths[1])
+  unname(paths)
 }
 
 cant_path_addins_json <- function() {
