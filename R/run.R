@@ -1,5 +1,5 @@
 run_shortcut <- function(n) {
-  path <- locate_shortcuts_source()
+  path <- suppressMessages(locate_shortcuts_source())
 
   shortcuts <- parse_shortcuts(path)
   if (!length(shortcuts)) {
