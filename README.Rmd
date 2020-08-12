@@ -34,18 +34,22 @@ remotes::install_github("gadenbuie/shrtcts")
 
 ## Quick Intro
 
-Store your shortcuts in `~/.config/.shrtcts.yaml` or `~/.shrtcts.yaml`.
+Store your shortcuts in `~/.config/.shrtcts.R` or `~/.shrtcts.R`.
 Each shortcut should look something like the example below,
-but you can include _any R code you want_ as the shortcut `Binding`.
+but you can include _any R code you want_ as the shortcut,
+as long as it's a function.
 
-```yaml
-- Name: Say Something Nice
-  Description: A demo of cool things
-  Binding: praise::praise
-  Interactive: true
+```r
+#' Say Something Nice
+#'
+#' A demo of cool things.
+#'
+#' @interactive
+#' @shortcut Ctrl+Alt+P
+praise::praise
 ```
 
-Then add this to your `~/.Rprofile` ,
+Then add the following lines to your `~/.Rprofile` ,
 which you can find quickly with `usethis::edit_r_profile()`.
 (Or you can skip this step
 and run `add_rstudio_shortcuts()` whenever you update your shortcuts.)
@@ -57,6 +61,15 @@ if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
 }
 ```
 
+You can also tell **shrtcts** to automatically update the keyboard shortcuts assignments.
+
+```{r eval=FALSE}
+# ~/.Rprofile
+if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
+  shrtcts::add_rstudio_shortcuts(set_keyboard_shortcuts = TRUE)
+}
+```
+
 After restarting  your R session, 
 you'll find your new shortcut
 **Say Something Nice**
@@ -64,15 +77,29 @@ in your RStudio Addins menu!
 
 <center><img src="man/figures/addin-nice.png" width="330px"/></center>
 
-If you store your `.shrtcts.yaml` file in your home directory,
+If you enabled keyboard shortcut management, 
+you'll also be able to run your new shortcut by pressing
+<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>P</kbd>.
+But note that whenever your keyboard shortcuts update,
+you'll need to completely restart RStudio —
+hint: try `usethis:::restart_rstudio()` —
+for RStudio to pick up the new keybindings.
+
+If you store your `.shrtcts.R` file in your home directory,
 you could also just run `shrtcts::add_rstudio_shortcuts()`
-whenever you update the YAML file
+whenever you update the shrtcts file
 instead of adding the above code to your `~/.Rprofile`.
 
-```{r child="man/fragments/shrtcts-yaml-format.Rmd"}
+```{r child="man/fragments/shrtcts-r-format.Rmd"}
+```
+
+```{r child="man/fragments/shrtcts-where-install.Rmd"}
 ```
 
 ```{r child="man/fragments/rstudio-keyboard-shortcuts.Rmd"}
+```
+
+```{r child="man/fragments/shrtcts-yaml-format.Rmd"}
 ```
 
 ## Inspiration

@@ -1,15 +1,15 @@
 run_shortcut <- function(n) {
   path <- getOption("shrtcts.path", NULL)
-  if (is.null(path)) path <- path_shortcuts_yaml()
+  if (is.null(path)) path <- path_shortcuts_source()
 
-  shortcuts <- parse_shortcuts_yaml(path)
+  shortcuts <- parse_shortcuts(path)
   if (!length(shortcuts)) {
     return(invisible())
   }
   this_shortcut <- shortcut_by_id(shortcuts, n)
   if (
     isTRUE(this_shortcut[["Interactive"]]) &&
-    is_packaged_fn(this_shortcut[["function"]]) &&
+    is_likely_packaged_fn(this_shortcut[["function"]]) &&
     can_send_to_console()
   ) {
     rstudioapi::sendToConsole(
@@ -50,6 +50,7 @@ can_send_to_console <- function() {
   rstudioapi::hasFun("sendToConsole")
 }
 
+#nocov start
 shortcut_01 <- function() run_shortcut(n = 1)
 shortcut_02 <- function() run_shortcut(n = 2)
 shortcut_03 <- function() run_shortcut(n = 3)
@@ -150,3 +151,4 @@ shortcut_97 <- function() run_shortcut(n = 97)
 shortcut_98 <- function() run_shortcut(n = 98)
 shortcut_99 <- function() run_shortcut(n = 99)
 shortcut_100 <- function() run_shortcut(n = 100)
+#nocov end

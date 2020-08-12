@@ -1,6 +1,6 @@
 Package: shrtcts
 Title: Make Anything an RStudio Shortcut
-Version: 0.0.3
+Version: 0.0.3.9000
 Authors@R: 
     person(given = "Garrick",
            family = "Aden-Buie",
@@ -16,7 +16,10 @@ URL: https://github.com/gadenbuie/shrtcts
 BugReports: https://github.com/gadenbuie/shrtcts/issues
 Imports: 
     fs,
+    jsonlite,
+    roxygen2,
     rstudioapi,
+    utils,
     yaml
 Suggests: 
     testthat (>= 2.1.0)

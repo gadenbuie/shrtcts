@@ -1,0 +1,25 @@
+## Where to Store Your Shortcuts
+
+Save your shortcuts R (or YAML) file as `.shrtcts.R` or `.shrtcts.yml`
+in your home directory or in the `.config` directory in your home directory ---
+use [fs::path_home_r()] or [fs::path_home()] to locate your home directory.
+In other words: `~/.config/.shrtcts.R` or `~/.shrtcts.yml`.
+
+You can test that **shrtcts** correctly finds your shortcuts file --
+or confirm which file will be used by **shrtcts** --
+using [locate_shortcuts_source()].
+
+## Install Your Shortcuts
+
+Run `add_rstudio_shortcuts()` to install your shortcuts. 
+You'll need to restart your R session for RStudio to learn your shortcuts.
+
+To also update your **shrtcts**-related keyboard shortcuts,
+set `set_keyboard_shortcuts = TRUE`.
+This will update the keyboard shortcuts stored in RStudio's `addins.json`,
+typically stored in `~/.config/rstudio/keybindings` (>= 1.3) or
+`~/.R/rstudio/keybindings` (< 1.3).
+If this file is stored in a non-standard location in your setup,
+you can provide `set_keyboard_shortcuts` with the correct path to `addins.json`.
+Whenever **shrtcts** updates the shortcut keybindings,
+a complete restart of RStudio is required (hint: use `usethis:::restart_rstudio()`).

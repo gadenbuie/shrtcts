@@ -20,25 +20,39 @@ remotes::install_github("gadenbuie/shrtcts")
 
 ## Quick Intro
 
-Store your shortcuts in `~/.config/.shrtcts.yaml` or `~/.shrtcts.yaml`.
-Each shortcut should look something like the example below, but you can
-include *any R code you want* as the shortcut `Binding`.
+Store your shortcuts in `~/.config/.shrtcts.R` or `~/.shrtcts.R`. Each
+shortcut should look something like the example below, but you can
+include *any R code you want* as the shortcut, as long as it’s a
+function.
 
-``` yaml
-- Name: Say Something Nice
-  Description: A demo of cool things
-  Binding: praise::praise
-  Interactive: true
+``` r
+#' Say Something Nice
+#'
+#' A demo of cool things.
+#'
+#' @interactive
+#' @shortcut Ctrl+Alt+P
+praise::praise
 ```
 
-Then add this to your `~/.Rprofile` , which you can find quickly with
-`usethis::edit_r_profile()`. (Or you can skip this step and run
-`add_rstudio_shortcuts()` whenever you update your shortcuts.)
+Then add the following lines to your `~/.Rprofile` , which you can find
+quickly with `usethis::edit_r_profile()`. (Or you can skip this step and
+run `add_rstudio_shortcuts()` whenever you update your shortcuts.)
 
 ``` r
 # ~/.Rprofile
 if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
   shrtcts::add_rstudio_shortcuts()
+}
+```
+
+You can also tell **shrtcts** to automatically update the keyboard
+shortcuts assignments.
+
+``` r
+# ~/.Rprofile
+if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
+  shrtcts::add_rstudio_shortcuts(set_keyboard_shortcuts = TRUE)
 }
 ```
 
@@ -51,81 +65,182 @@ Something Nice** in your RStudio Addins menu\!
 
 </center>
 
-If you store your `.shrtcts.yaml` file in your home directory, you could
+If you enabled keyboard shortcut management, you’ll also be able to run
+your new shortcut by pressing <kbd>Ctrl</kbd> + <kbd>Alt</kbd> +
+<kbd>P</kbd>. But note that whenever your keyboard shortcuts update,
+you’ll need to completely restart RStudio — hint: try
+`usethis:::restart_rstudio()` — for RStudio to pick up the new
+keybindings.
+
+If you store your `.shrtcts.R` file in your home directory, you could
 also just run `shrtcts::add_rstudio_shortcuts()` whenever you update the
-YAML file instead of adding the above code to your `~/.Rprofile`.
+shrtcts file instead of adding the above code to your `~/.Rprofile`.
+
+## shrtcts R Format
+
+Use the following template to organize your `.shrtcts.R`. You can write
+each shortcut in regular R code, annotated with
+[roxygen2](https://roxygen2.r-lib.org/) inline documentation comments.
+The comment format uses standard roxygen2 formatting, with a few
+additional roxygen tags specifically for **shrtcts**
+
+``` r
+#' Say Something Nice
+#'
+#' A demo of cool things.
+#'
+#' @interactive
+#' @shortcut Ctrl+Alt+P
+praise::praise
+```
+
+### roxygen2 Tags
+
+**shrtcts** recognizes the following roxygen tags. Tags are optional
+unless otherwise specified.
+
+  - `@title` (required): The name of the shortcut’s addin in RStudio.
+    The tag itself is not required, the first line of untagged text (`#'
+    Say Something Nice` above) is interpreted as the title.
+
+  - A *function*, either exported from another package,
+    e.g. `praise::praise` or as an anonymous or named function provided
+    immediately below the roxygen2 comments section. (Function names are
+    ignored if provided).
+
+  - `@description`: A description of the shortcut. Can be specified with
+    the roxygen tag or it can be the first paragraph of untagged text
+    after the title line.
+
+  - `@interactive`: Whether or not the shortcut’s addin should be
+    executed interactively.
+    
+    Non-interactive addins are run in the background, without alerting
+    the user and without providing a mechanism for the user to cancel
+    the function.
+    
+    If the shortcut is interactive and calls a function stored in
+    another package, the code to execute the function will be displayed
+    in the console, rather than the placeholder shortcut from
+    **shrtcts**.
+
+  - `@id`: An integer id (\< 100) used to link the shortcut to a
+    specific placeholder function in **shrtcts**. For example, `#'
+    @id 5` will link the provided shortcut to `shrtcts:::shortcut_05()`.
+    This is particularly useful if you have a keyboard shortcut linked
+    to your shortcut, although the need for this tag is mitigated by the
+    `@shortcut` tag.
+
+  - `@shortcut`: A combination of keys to be used as a keyboard shortcut
+    in RStudio. Keyboard shortcuts are only applied if
+    `set_keyboard_shortcuts` is set when calling
+    \[add\_rstudio\_shortcuts()\]. This option is disabled by default.
+
+## Where to Store Your Shortcuts
+
+Save your shortcuts R (or YAML) file as `.shrtcts.R` or `.shrtcts.yml`
+in your home directory or in the `.config` directory in your home
+directory — use
+[fs::path\_home\_r()](https://fs.r-lib.org/reference/path_expand.html)
+or [fs::path\_home()](https://fs.r-lib.org/reference/path_expand.html)
+to locate your home directory. In other words: `~/.config/.shrtcts.R` or
+`~/.shrtcts.yml`.
+
+You can test that **shrtcts** correctly finds your shortcuts file – or
+confirm which file will be used by **shrtcts** – using
+\[locate\_shortcuts\_source()\].
+
+## Install Your Shortcuts
+
+Run `add_rstudio_shortcuts()` to install your shortcuts. You’ll need to
+restart your R session for RStudio to learn your shortcuts.
+
+To also update your **shrtcts**-related keyboard shortcuts, set
+`set_keyboard_shortcuts = TRUE`. This will update the keyboard shortcuts
+stored in RStudio’s `addins.json`, typically stored in
+`~/.config/rstudio/keybindings` (\>= 1.3) or `~/.R/rstudio/keybindings`
+(\< 1.3). If this file is stored in a non-standard location in your
+setup, you can provide `set_keyboard_shortcuts` with the correct path to
+`addins.json`. Whenever **shrtcts** updates the shortcut keybindings, a
+complete restart of RStudio is required (hint: use
+`usethis:::restart_rstudio()`).
+
+## RStudio Keyboard Shortcuts
+
+Once you’ve setup an RStudio Addin via **shrtcts**, there are two ways
+to link the shortcut’s addin to a keyboard shortcut.
+
+### Declare Keyboard Shortcuts in `.shrtcts.R`
+
+You can use the `@shortcut` tag to declare the shortcut in `.shrtcts.R`
+(or `shortcut:` in the YAML `.shrtcts.yml`).
+
+To update the keyboard shortcuts, set `set_keyboard_shortcuts = TRUE`
+when calling `add_rstudio_shortcuts()`.
+
+  - `.shrtcts.R`
+    
+    ``` r
+    #' Say Something Nice
+    #'
+    #' @description A demo of cool things
+    #' @interactive
+    #' @shortcut Ctrl+Alt+P
+    praise::praise
+    ```
+
+  - `.shrtcts.yml`
+    
+    ``` yaml
+    - Name: Say Something Nice
+      Description: A demo of cool things
+      Binding: praise::praise
+      shortcut: Ctrl+Alt+P
+      Interactive: true
+    ```
+
+A full restart of RStudio is required whenever **shrtcts** udpates the
+shortcut keybindings. **shrtcts** only manages keybindings for its own
+addins, and it doesn’t check for conflicting key combinations, so you
+may want to double check the RStudio menu.
+
+If anything goes wrong, a backup of the keybindings are saved as
+`addins.json.bak` in the same folder where `addins.json` was found. Use
+\[location\_addins\_json()\] to find this file.
+
+### Setting Keyboard Shortcuts via RStudio Menus
+
+You can create a keyboard shortcut for the addin using the *Tools* \>
+*Modify keyboard shortcuts* menu.
+
+If you create a shortcut for an addin via the menu, it’s a good idea to
+set the `id` of the shortcut.
+
+You can set your keyboard shortcuts manually in your `.shrtcts.R` or
+`.shrtcts.yml` files, using the `@shortcut` tag or `shortcut:` item
+name.
 
 ## shrtcts YAML format
+
+**shrtcts** initially provided a way to specify the shortcuts in a YAML
+file. This made sense because everything is YAML these days, so why not
+add yet another YAML config file to the mix? But writing R code inside
+YAML is, um, less than ideal. So it’s no longer recommended, but it is
+still supported (for now). To convert existing shortcuts from YAML to
+the roxygen2 format, use the internal `shrtcts:::migrate_yaml2r()`
+function.
 
 Use the following template to organize your `.shrtcts.yaml`. Each
 shortcut is a YAML list item with the following structure:
 
 ``` yaml
-- Name: Say Something Nice
-  Description: A demo of cool things
-  Binding: praise::praise
+- Name: Make A Noise
+  Description: Play a short sound
+  Binding: beepr::beep
   Interactive: true
+  id: 42
+  shortcut: Ctrl+Shift+B
 ```
-
-This format follows the format used by RStudio in the `addins.dcf` file.
-The minimum required fields are `Name` and `Binding`. Use the
-`example_shortcuts_yaml()` function to see a complete example YAML file.
-Note that unlike the `addins.dcf` file format, in `.shrtcts.yaml`, the
-`Binding` field is an R function or arbitrary R code. If your shortcut
-calls a function in another package, you can simply set `Binding` to the
-function name, as in the example above. Otherwise, you can use a
-multi-line literal-style YAML block to write your R code:
-
-``` yaml
-- Name: New Temporary R Markdown Document
-  Binding: |
-    tmp <- tempfile(fileext = ".Rmd")
-    rmarkdown::draft(
-      tmp,
-      template = "github_document",
-      package = "rmarkdown",
-      edit = FALSE
-    )
-    rstudioapi::navigateToFile(tmp)
-  Interactive: false
-```
-
-Note that when `Interactive` is `false`, no output will be shown unless
-you explicitly call a `print()` or a similar function.
-
-Save your shortcuts YAML file to `.config/.shrtcts.yaml` or
-`.shrtcts.yaml` in your home directory —
-i.e. [fs::path\_home\_r()](https://fs.r-lib.org/reference/path_expand.html)
-or [fs::path\_home()](https://fs.r-lib.org/reference/path_expand.html) —
-and run `add_rstudio_shortcuts()` to install your shortcuts. You’ll need
-to restart your R session for RStudio to learn your shortcuts.
-
-Once RStudio has learned about your shortcuts, you can create keyboard
-shortcuts to trigger each action. Note that the order of the shortcuts
-in your YAML file is important. `shrtcts` comes with are 100 “slots” for
-RStudio addins. Changing the order of the shortcuts in the YAML file
-will change which slot is used for each shortcut, which could break your
-keyboard shortcuts. To avoid this, specifically set the id of any
-shortcut to a number between 1 and 100, to ensure that keyboard
-shortcuts remain the same.
-
-    - Name: Make A Noise
-      Binding: beepr::beep()
-      id: 42
-
-## RStudio Keyboard Shortcuts
-
-Once you’ve setup an RStudio Addin via `shrtcts`, you can create a
-keyboard shortcut for the addin using the *Tools* \> *Modify keyboard
-shortcuts* menu.
-
-If you create a shortcut for an addin via `shrtcts`, it’s a good idea to
-set the `id` of the shortcut (see the section above).
-
-Keyboard shortcuts persist even if you update the list of shortcuts, but
-re-installing the `shrtcts` package will break any previously-installed
-shortcuts. As far as I know, there’s no way to save and restore these
-shortcuts, so use caution.
 
 ## Inspiration
 

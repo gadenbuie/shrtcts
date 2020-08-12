@@ -13,7 +13,8 @@ opened via \code{file.edit()}. Otherwise, the path is returned.}
 \item{path}{The path to your \code{.shtrcts.yaml} file. If \code{NULL}, \pkg{shrtcts}
 will look in your R or OS home directory (via \code{\link[fs:path_expand]{fs::path_home_r()}} or
 \code{\link[fs:path_expand]{fs::path_home()}}). You can set this path via the global option
-\code{"shrtcts.path"}.}
+\code{"shrtcts.path"}. For more information, see the help documentation on
+\link{paths}.}
 }
 \value{
 The path to the \code{.shrtcts.yml} source file (invisibly if the file is
