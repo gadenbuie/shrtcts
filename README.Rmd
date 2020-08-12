@@ -15,6 +15,9 @@ knitr::opts_chunk$set(
 
 [fs::path_home_r()]: https://fs.r-lib.org/reference/path_expand.html
 [fs::path_home()]: https://fs.r-lib.org/reference/path_expand.html
+[add_rstudio_shortcuts()]: https://github.com/gadenbuie/shrtcts/tree/master/R/add_shortcuts.R
+[list_shortcuts()]: https://github.com/gadenbuie/shrtcts/tree/master/R/list.R
+[locate_shortcuts_source()]: https://github.com/gadenbuie/shrtcts/tree/master/R/paths.R
 
 # shrtcts
 

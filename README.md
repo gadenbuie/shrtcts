@@ -134,7 +134,8 @@ unless otherwise specified.
   - `@shortcut`: A combination of keys to be used as a keyboard shortcut
     in RStudio. Keyboard shortcuts are only applied if
     `set_keyboard_shortcuts` is set when calling
-    \[add\_rstudio\_shortcuts()\]. This option is disabled by default.
+    [add\_rstudio\_shortcuts()](https://github.com/gadenbuie/shrtcts/tree/master/R/add_shortcuts.R).
+    This option is disabled by default.
 
 ## Where to Store Your Shortcuts
 
@@ -148,7 +149,7 @@ to locate your home directory. In other words: `~/.config/.shrtcts.R` or
 
 You can test that **shrtcts** correctly finds your shortcuts file – or
 confirm which file will be used by **shrtcts** – using
-\[locate\_shortcuts\_source()\].
+[locate\_shortcuts\_source()](https://github.com/gadenbuie/shrtcts/tree/master/R/paths.R).
 
 ## Install Your Shortcuts
 
@@ -170,13 +171,28 @@ complete restart of RStudio is required (hint: use
 Once you’ve setup an RStudio Addin via **shrtcts**, there are two ways
 to link the shortcut’s addin to a keyboard shortcut.
 
+You can verify and list the current shortcuts and their keyboard
+bindings with
+[list\_shortcuts()](https://github.com/gadenbuie/shrtcts/tree/master/R/list.R).
+
+``` r
+shrtcts::list_shortcuts()
+#>                                name       addin shrtcts_keybinding rstudio_keybinding
+#> 1                 10 random numbers shortcut_01               <NA>               <NA>
+#> 2 New Temporary R Markdown Document shortcut_02   Ctrl+Alt+Shift+T   Ctrl+Alt+Shift+T
+#> 3   A Random Number Between 0 and 1 shortcut_03               <NA>               <NA>
+#> 4                Say Something Nice shortcut_97         Ctrl+Alt+P         Ctrl+Alt+P
+```
+
 ### Declare Keyboard Shortcuts in `.shrtcts.R`
 
 You can use the `@shortcut` tag to declare the shortcut in `.shrtcts.R`
 (or `shortcut:` in the YAML `.shrtcts.yml`).
 
-To update the keyboard shortcuts, set `set_keyboard_shortcuts = TRUE`
-when calling `add_rstudio_shortcuts()`.
+To update the keyboard shortcuts (for shrtcts only\!), set
+`set_keyboard_shortcuts = TRUE` when calling `add_rstudio_shortcuts()`.
+If you use this method, shortcuts set manually in RStudio will be
+overwritten, so you should choose one method or the other.
 
   - `.shrtcts.R`
     
@@ -206,7 +222,7 @@ may want to double check the RStudio menu.
 
 If anything goes wrong, a backup of the keybindings are saved as
 `addins.json.bak` in the same folder where `addins.json` was found. Use
-\[location\_addins\_json()\] to find this file.
+`location_addins_json()` to find this file.
 
 ### Setting Keyboard Shortcuts via RStudio Menus
 

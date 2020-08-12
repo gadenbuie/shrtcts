@@ -4,6 +4,7 @@
   id: 97
   Description: A demo of cool things
   Binding: praise::praise
+  shortcut: Ctrl+Alt+P
   Interactive: true
 - Name: New Temporary R Markdown Document
   Binding: |
@@ -16,6 +17,7 @@
     )
     rstudioapi::navigateToFile(tmp)
   Interactive: false
+  shortcut: Ctrl+Alt+Shift+T
 - Name: A Random Number Between 0 and 1
   Description: Another demo
   Binding: runif(1, 0, 1)

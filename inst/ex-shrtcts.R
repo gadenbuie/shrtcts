@@ -1,6 +1,5 @@
 #' 10 random numbers
 #'
-#' @description 
 #' @id 1
 #' @interactive
 function() {
@@ -11,15 +10,14 @@ function() {
 #'
 #' @description A demo of cool things
 #' @id 97
+#' @shortcut Ctrl+Alt+P
 #' @interactive
-function() {
-    praise::praise
-}
+praise::praise
 
 #' New Temporary R Markdown Document
 #'
-#' @description 
 #' @id 2
+#' @shortcut Ctrl+Alt+Shift+T
 function() {
     tmp <- tempfile(fileext = ".Rmd")
     rmarkdown::draft(tmp, template = "github_document", package = "rmarkdown", edit = FALSE)

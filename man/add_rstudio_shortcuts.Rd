@@ -120,13 +120,24 @@ complete restart of RStudio is required (hint: use
 
 Once you’ve setup an RStudio Addin via \strong{shrtcts}, there are two ways
 to link the shortcut’s addin to a keyboard shortcut.
+
+You can verify and list the current shortcuts and their keyboard
+bindings with \code{\link[=list_shortcuts]{list_shortcuts()}}.\if{html}{\out{<div class="r">}}\preformatted{shrtcts::list_shortcuts()
+}\if{html}{\out{</div>}}\preformatted{##                                name       addin shrtcts_keybinding rstudio_keybinding
+## 1                 10 random numbers shortcut_01               <NA>               <NA>
+## 2 New Temporary R Markdown Document shortcut_02   Ctrl+Alt+Shift+T   Ctrl+Alt+Shift+T
+## 3   A Random Number Between 0 and 1 shortcut_03               <NA>               <NA>
+## 4                Say Something Nice shortcut_97         Ctrl+Alt+P         Ctrl+Alt+P
+}
 \subsection{Declare Keyboard Shortcuts in \code{.shrtcts.R}}{
 
 You can use the \verb{@shortcut} tag to declare the shortcut in \code{.shrtcts.R}
 (or \verb{shortcut:} in the YAML \code{.shrtcts.yml}).
 
-To update the keyboard shortcuts, set \code{set_keyboard_shortcuts = TRUE}
-when calling \code{add_rstudio_shortcuts()}.
+To update the keyboard shortcuts (for shrtcts only!), set
+\code{set_keyboard_shortcuts = TRUE} when calling \code{add_rstudio_shortcuts()}.
+If you use this method, shortcuts set manually in RStudio will be
+overwritten, so you should choose one method or the other.
 \itemize{
 \item \code{.shrtcts.R}\if{html}{\out{<div class="r">}}\preformatted{#' Say Something Nice
 #'
@@ -203,4 +214,7 @@ if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
   shrtcts::add_rstudio_shortcuts()
 }
 
+}
+\seealso{
+\code{\link[=list_shortcuts]{list_shortcuts()}}
 }

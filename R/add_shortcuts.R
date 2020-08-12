@@ -33,6 +33,7 @@
 #'   shrtcts::add_rstudio_shortcuts()
 #' }
 #'
+#' @seealso [list_shortcuts()]
 #' @export
 add_rstudio_shortcuts <- function(path = NULL, set_keyboard_shortcuts = FALSE) {
   if (!is_interactive()) return(invisible())
@@ -57,7 +58,7 @@ add_rstudio_shortcuts <- function(path = NULL, set_keyboard_shortcuts = FALSE) {
 #' @describeIn add_rstudio_shortcuts An example `.shrtcts.yml` file.
 #' @export
 example_shortcuts_yaml <- function() {
-  x <- readLines(system.file("shrtcts.yaml", package = "shrtcts"))
+  x <- readLines(system.file("ex-shrtcts.yaml", package = "shrtcts"))
   cat(x, sep = "\n")
   invisible(x)
 }
@@ -65,7 +66,7 @@ example_shortcuts_yaml <- function() {
 #' @describeIn add_rstudio_shortcuts An example `.shrtcts.R` file.
 #' @export
 example_shortcuts_r <- function() {
-  x <- readLines(system.file("shrtcts.R", package = "shrtcts"))
+  x <- readLines(system.file("ex-shrtcts.R", package = "shrtcts"))
   cat(x, sep = "\n")
   invisible(x)
 }
