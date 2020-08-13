@@ -1,6 +1,6 @@
 Package: shrtcts
 Title: Make Anything an RStudio Shortcut
-Version: 0.0.3.9000
+Version: 0.1.0
 Authors@R: 
     person(given = "Garrick",
            family = "Aden-Buie",
@@ -12,7 +12,7 @@ Description: An easily customizable method for creating RStudio
     from other packages. Your shortcuts are stored in a YAML file in your
     home directory.
 License: MIT + file LICENSE
-URL: https://github.com/gadenbuie/shrtcts
+URL: https://pkg.garrickadenbuie.com/shrtcts, https://github.com/gadenbuie/shrtcts
 BugReports: https://github.com/gadenbuie/shrtcts/issues
 Imports: 
     fs,
