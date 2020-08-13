@@ -1,31 +1,21 @@
-# test_that()
-
-parse_shortcuts_text <- function(text, ext = "R") {
-  file <- fs::file_temp(ext = ext)
-  on.exit(unlink(file))
-  writeLines(text, file)
-
-  parse_shortcuts(file)
-}
-
 describe("parse_shortcuts_r()", {
   it("works with packaged functions", {
     text <- "
-#' Restart RStudio
+#' Shortcut Title
 #'
-#' Restarts RStudio
+#' Shortcut Description
 #'
 #' @id 5
 #' @interactive
-usethis:::restart_rstudio"
+shrtcts:::test_fun"
 
     sh <- parse_shortcuts_text(text)
     expect_true(is_shrtcts(sh))
     expect_true(is_shrtcts_r(sh))
-    expect_equal(sh[[1]]$Name, "Restart RStudio")
-    expect_equal(sh[[1]]$Description, "Restarts RStudio")
+    expect_equal(sh[[1]]$Name, "Shortcut Title")
+    expect_equal(sh[[1]]$Description, "Shortcut Description")
     expect_equal(sh[[1]]$id, 5L)
-    expect_equal(sh[[1]]$`function`, "usethis:::restart_rstudio")
+    expect_equal(sh[[1]]$`function`, "shrtcts:::test_fun")
     expect_true(sh[[1]]$Interactive)
     expect_equal(sh[[1]]$Binding, "shortcut_05")
     expect_true(is_likely_packaged_fn(sh[[1]]$`function`))
@@ -100,22 +90,22 @@ function() message('hello')
 
 test_that("parse_shortcuts_r() and parse_shortcuts_yaml() are equivalent", {
   txt_r <- "
-#' Restart RStudio
+#' Shortcut Title
 #'
-#' Restarts RStudio
+#' Shortcut Description
 #'
 #' @id 5
 #' @shortcut Ctrl+Alt+Shift+R
 #' @interactive
-usethis:::restart_rstudio"
+shrtcts:::test_fun"
 
   txt_yml <- "
-- name: Restart RStudio
-  description: Restarts RStudio
+- name: Shortcut Title
+  description: Shortcut Description
   id: 5
   shortcut: Ctrl+Alt+Shift+R
   Interactive: true
-  Binding: usethis:::restart_rstudio
+  Binding: shrtcts:::test_fun
 "
   sh_r <- parse_shortcuts_text(txt_r, "R")[[1]]
   sh_r <- lapply(sh_r, as.character)
