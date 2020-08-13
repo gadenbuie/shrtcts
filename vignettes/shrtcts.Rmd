@@ -1,0 +1,42 @@
+---
+title: "shrtcts"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{shrtcts}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+[fs::path_home_r()]: https://fs.r-lib.org/reference/path_expand.html
+[fs::path_home()]: https://fs.r-lib.org/reference/path_expand.html
+[add_rstudio_shortcuts()]: https://pkg.garrickadenbuie.com/shrtcts/reference/add_rstudio_shortcuts.html
+[list_shortcuts()]: https://pkg.garrickadenbuie.com/shrtcts/reference/list_shortcuts.html
+[locate_shortcuts_source()]: https://pkg.garrickadenbuie.com/shrtcts/reference/paths.html
+
+
+```{r child="../man/fragments/shrtcts-quick-start.Rmd"}
+```
+
+```{r child="../man/fragments/shrtcts-r-format.Rmd"}
+```
+
+```{r child="../man/fragments/shrtcts-where-install.Rmd"}
+```
+
+```{r child="../man/fragments/rstudio-keyboard-shortcuts.Rmd"}
+```
+
+```{r child="../man/fragments/shrtcts-yaml-format.Rmd"}
+```
+
+## Inspiration
+
+```{r child="../man/fragments/inspiration.Rmd"}
+```

@@ -1,13 +1,64 @@
 ## RStudio Keyboard Shortcuts
 
-Once you've setup an RStudio Addin via
-`shrtcts`, you can create a keyboard shortcut for the addin using the
+Once you've setup an RStudio Addin via **shrtcts**,
+there are two ways to link the shortcut's addin to a keyboard shortcut.
+
+You can verify and list the current shortcuts and their keyboard bindings with [list_shortcuts()].
+
+```{r echo=2}
+old_opts <- options(shrtcts.path = system.file("ex-shrtcts.R", package = "shrtcts"), shrtcts.addins_json = system.file("ex-addins.json", package = "shrtcts"), width = 90)
+shrtcts::list_shortcuts()
+options(old_opts)
+```
+
+### Declare Keyboard Shortcuts in `.shrtcts.R`
+
+You can use the `@shortcut` tag to declare the shortcut in `.shrtcts.R`
+(or `shortcut:` in the YAML `.shrtcts.yml`).
+   
+To update the keyboard shortcuts (for shrtcts only!),
+set `set_keyboard_shortcuts = TRUE` when calling `add_rstudio_shortcuts()`.
+If you use this method, 
+shortcuts set manually in RStudio will be overwritten,
+so you should choose one method or the other.
+
+- `.shrtcts.R`
+
+  ```r
+  #' Say Something Nice
+  #'
+  #' @description A demo of cool things
+  #' @interactive
+  #' @shortcut Ctrl+Alt+P
+  praise::praise
+  ```
+
+- `.shrtcts.yml`
+
+  ```yaml
+  - Name: Say Something Nice
+    Description: A demo of cool things
+    Binding: praise::praise
+    shortcut: Ctrl+Alt+P
+    Interactive: true
+  ```
+
+A full restart of RStudio is required whenever **shrtcts** udpates the shortcut keybindings.
+**shrtcts** only manages keybindings for its own addins,
+and it doesn't check for conflicting key combinations,
+so you may want to double check the RStudio menu.
+
+If anything goes wrong, a backup of the keybindings are saved as `addins.json.bak`
+in the same folder where `addins.json` was found.
+Use `location_addins_json()` to find this file.
+
+### Setting Keyboard Shortcuts via RStudio Menus
+   
+You can create a keyboard shortcut for the addin using the
 _Tools_ > _Modify keyboard shortcuts_ menu.
 
-If you create a shortcut for an addin via `shrtcts`, it's a good idea to
-set the `id` of the shortcut (see the section above).
+If you create a shortcut for an addin via the menu, 
+it's a good idea to set the `id` of the shortcut.
 
-Keyboard shortcuts persist even if you update the list of shortcuts, but
-re-installing the `shrtcts` package will break any previously-installed
-shortcuts. As far as I know, there's no way to save and restore these
-shortcuts, so use caution.
+
+You can set your keyboard shortcuts manually in your `.shrtcts.R` or `.shrtcts.yml` files, using the `@shortcut` tag or `shortcut:` item name.

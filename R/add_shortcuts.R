@@ -7,15 +7,23 @@
 #' (if not, try restarting your R session one more time). Your shortcuts can
 #' be arbitrary functions written inline or functions from other packages. You
 #' can set their names and even assign keyboard shortcuts to your shrtcts.
+#' See detailed sections below.
 #'
-#' @includeRmd man/fragments/shrtcts-yaml-format.Rmd
+#' @includeRmd man/fragments/shrtcts-r-format.Rmd
+#'
+#' @includeRmd man/fragments/shrtcts-where-install.Rmd
 #'
 #' @includeRmd man/fragments/rstudio-keyboard-shortcuts.Rmd
+#'
+#' @includeRmd man/fragments/shrtcts-yaml-format.Rmd
 #'
 #' @param path The path to your `.shtrcts.yaml` file. If `NULL`, \pkg{shrtcts}
 #'   will look in your R or OS home directory (via [fs::path_home_r()] or
 #'   [fs::path_home()]). You can set this path via the global option
-#'   `"shrtcts.path"`.
+#'   `"shrtcts.path"`. For more information, see the help documentation on
+#'   [paths].
+#' @param set_keyboard_shortcuts If `TRUE`, will attempt to set the RStudio
+#'   keyboard shortcuts in `addins.json`.
 #'
 #' @examples
 #' # Add shortcuts to ~/.shrtcts.yaml (see help above)
@@ -25,24 +33,40 @@
 #'   shrtcts::add_rstudio_shortcuts()
 #' }
 #'
+#' @seealso [list_shortcuts()]
 #' @export
-add_rstudio_shortcuts <- function(path = NULL) {
-  if (!interactive()) return(invisible())
+add_rstudio_shortcuts <- function(path = NULL, set_keyboard_shortcuts = FALSE) {
+  if (!is_interactive()) return(invisible())
 
-  path <- locate_shortcuts_yaml(path)
+  path <- locate_shortcuts_source(path)
 
-  shortcuts <- parse_shortcuts_yaml(path)
+  shortcuts <- parse_shortcuts(path)
 
   if (!length(shortcuts)) return(invisible())
 
   write_addins(shortcuts)
-  invisible()
+  if (is.character(set_keyboard_shortcuts) || isTRUE(set_keyboard_shortcuts)) {
+    write_keyboard_shortcuts(
+      shortcuts,
+      path = if (!is.logical(set_keyboard_shortcuts)) set_keyboard_shortcuts
+    )
+  }
+
+  invisible(path)
 }
 
 #' @describeIn add_rstudio_shortcuts An example `.shrtcts.yml` file.
 #' @export
 example_shortcuts_yaml <- function() {
-  x <- readLines(system.file(".shrtcts.yaml", package = "shrtcts"))
+  x <- readLines(system.file("ex-shrtcts.yaml", package = "shrtcts"))
+  cat(x, sep = "\n")
+  invisible(x)
+}
+
+#' @describeIn add_rstudio_shortcuts An example `.shrtcts.R` file.
+#' @export
+example_shortcuts_r <- function() {
+  x <- readLines(system.file("ex-shrtcts.R", package = "shrtcts"))
   cat(x, sep = "\n")
   invisible(x)
 }
@@ -50,137 +74,43 @@ example_shortcuts_yaml <- function() {
 #' Open the shrtcts Source File
 #'
 #' This helper function locates and opens (or returns the path to) the
-#' `.shrtcts.yml` file.
+#' `.shrtcts.R` or `.shrtcts.yml` file.
 #'
-#' @param open If `TRUE` and the `.shrtcts.yml` file is found, then the file is
-#'   opened via `file.edit()`. Otherwise, the path is returned.
+#' @param open If `TRUE` and the shrtcts source file is found (see [paths]),
+#'   then the file is opened via `file.edit()`. Otherwise, the path is returned.
 #' @inheritParams add_rstudio_shortcuts
 #'
-#' @return The path to the `.shrtcts.yml` source file (invisibly if the file is
-#'   opened).
+#' @return The path to the `.shrtcts.R` or `.shrtcts.yml` source file (invisibly
+#'  if the file is opened).
 #'
 #' @export
 edit_shortcuts <- function(open = TRUE, path = NULL) {
-  path <- locate_shortcuts_yaml(path)
+  path <- locate_shortcuts_source(path)
   if (isTRUE(open)) {
-    file.edit(as.character(path))
+    if (
+      requireNamespace("rstudioapi", quietly = TRUE) &&
+        rstudioapi::hasFun("navigateToFile")
+    ) {
+      rstudioapi::navigateToFile(path)
+    } else {
+      utils::file.edit(as.character(path))
+    }
     invisible(path)
   } else {
     path
   }
 }
 
-how_to_use <- function() `?`(shrtcts::add_rstudio_shortcuts)
-
-locate_shortcuts_yaml <- function(path = NULL) {
-  if (is.null(path)) {
-    path <- getOption("shrtcts.path", NULL)
-  } else {
-    path <- fs::path_norm(path)
-    if (!fs::file_exists(path)) {
-      stop("shrtcts file does not exist: ", path, call. = FALSE)
-    }
-    options("shrtcts.path" = path)
-  }
-  if (is.null(path)) path <- path_shortcuts_yaml()
-  path
-}
-
-how_to_use <- function() `?`(shrtcts::add_rstudio_shortcuts)
-
-path_shortcuts_yaml <- function() {
-  try_dirs <- c(
-    fs::path_home_r(c(".config", "")),
-    fs::path_home(c(".config", ""))
-  )
-  try_dirs <- unique(try_dirs)
-  dir <- try_dirs[fs::dir_exists(try_dirs)]
-  if (!length(dir)) cant_path_shortcuts_yaml()
-
-  path <- fs::dir_ls(dir, regexp = "[.]shrtcts[.]ya?ml", all = TRUE)
-  if (!length(path)) cant_path_shortcuts_yaml()
-
-  path[1]
-}
-
-cant_path_shortcuts_yaml <- function() {
-  stop(
-    "Could not find .shrtcts.yaml in ",
-    fs::path_home_r(".config"),
-    " or ",
-    fs::path_home_r(),
-    call. = FALSE
-  )
-}
-
-parse_shortcuts_yaml <- function(path) {
-  x <- yaml::read_yaml(path)
-  x <- add_shortcut_ids(x)
-  lapply(x, function(shortcut) {
-    stopifnot("name" %in% tolower(names(shortcut)))
-    stopifnot("binding" %in% tolower(names(shortcut)))
-    for (name in c("Name", "Binding", "Description", "Interactive")) {
-      if (tolower(name) %in% names(shortcut) && !name %in% names(shortcut)) {
-        names(shortcut)[which(tolower(name) == names(shortcut))] <- name
-      }
-    }
-    shortcut[["function"]] <- shortcut$Binding
-    shortcut$Binding <- sprintf("shortcut_%02d", shortcut$id)
-    if (!"Description" %in% names(shortcut)) {
-      shortcut[["Description"]] <- ""
-    }
-    if (!"Interactive" %in% names(shortcut)) {
-      shortcut[["Interactive"]] <- TRUE
-    }
-    shortcut
-  })
-}
-
-add_shortcut_ids <- function(x) {
-  declared_ids <- as.integer(unlist(lapply(x, `[[`, "id")))
-  if (any(is.na(declared_ids))) {
-    stop("Shortcuts must have integer ids", call. = FALSE)
-  }
-  if (any(duplicated(declared_ids))) {
-    dups <- unique(declared_ids[duplicated(declared_ids)])
-    warning(
-      "Multiple shortcuts have the same id: ",
-      paste(dups, collapse = ", "),
-      call. = FALSE,
-      immediate. = TRUE
-    )
-  }
-  if (any(declared_ids > 100)) {
-    bad <- unique(declared_ids[declared_ids > 100])
-    stop(
-      "Shortcuts with id > 100 will not work: ",
-      paste(bad, collapse = ", "),
-      call. = FALSE
-    )
-  }
-  ids <- c()
-  i <- 1L
-  for (idx in seq_along(x)) {
-    if (is.null(x[[idx]][["id"]])) {
-      while (i %in% c(ids, declared_ids)) {
-        i <- i + 1L
-      }
-      x[[idx]]$id <- i
-      ids <- c(ids, i)
-    } else {
-      x[[idx]]$id <- as.integer(x[[idx]]$id)
-    }
-  }
-  x
-}
+how_to_use <- function() utils::`?`(shrtcts::add_rstudio_shortcuts)
 
 as_dcf <- function(x) {
+  txt <- ""
   txt_con <- textConnection("txt", "w", local = TRUE)
   lapply(x, function(s) {
-    if (is_packaged_fn(s[["function"]])) {
+    if (is_likely_packaged_fn(s[["function"]])) {
       s[["Interactive"]] <- FALSE
     }
-    s[["function"]] <- NULL
+    s <- s[c("Name", "Description", "Interactive", "Binding")]
     write.dcf(s, txt_con)
     cat("\n", file = txt_con)
   })
@@ -195,7 +125,7 @@ write_addins <- function(x) {
   writeLines(x, fs::path(outdir, "addins.dcf"))
 }
 
-is_packaged_fn <- function(f_text) {
+is_likely_packaged_fn <- function(f_text) {
   length(f_text) == 1 &&
     !grepl("\n", f_text) &&
     grepl("^[a-zA-Z][a-zA-Z0-9.]+[:]{2,3}\\w+$", f_text)

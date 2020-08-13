@@ -1,0 +1,62 @@
+url: https://pkg.garrickadenbuie.com/shrtcts/
+
+home:
+  description: >
+    Make Anything an RStudio Shortcut
+
+template:
+  opengraph:
+    image:
+      src: man/figures/shrtcts-card.png
+    twitter:
+      creator: "@grrrck"
+      card: summary_large_image
+
+authors:
+  Garrick Aden-Buie:
+    href: https://www.garrickadenbuie.com
+
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    right:
+    - news
+    - github
+    - twitter
+    - garrick
+  components:
+    home:
+      icon: ~
+      text: Overview
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    news:
+      icon: fa fa-newspaper-o fa-lg
+      href: news/index.html
+      text: ""
+      title: "Changelog"
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/gadenbuie/shrtcts
+    garrick:
+      icon: fa-home fa-lg
+      href: https://garrickadenbuie.com
+      title: Garrick Aden-Buie
+    twitter:
+      icon: fa-twitter fa-lg
+      href: https://twitter.com/grrrck
+
+reference:
+- title: All functions
+  contents:
+  - '`add_rstudio_shortcuts`'
+  - '`list_shortcuts`'
+  - '`edit_shortcuts`'
+  - '`paths`'

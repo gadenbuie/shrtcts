@@ -1,0 +1,53 @@
+## shrtcts R Format
+
+Use the following template to organize your `.shrtcts.R`. 
+You can write each shortcut in regular R code,
+annotated with [roxygen2](https://roxygen2.r-lib.org/) inline documentation comments.
+The comment format uses standard roxygen2 formatting,
+with a few additional roxygen tags specifically for **shrtcts**
+
+```r
+#' Say Something Nice
+#'
+#' A demo of cool things.
+#'
+#' @interactive
+#' @shortcut Ctrl+Alt+P
+praise::praise
+```
+
+### roxygen2 Tags
+
+**shrtcts** recognizes the following roxygen tags.
+Tags are optional unless otherwise specified.
+
+- `@title` (required): The name of the shortcut's addin in RStudio.
+  The tag itself is not required, the first line of untagged text
+  (`#' Say Something Nice` above) is interpreted as the title.
+  
+- A _function_, either exported from another package, e.g. `praise::praise` or
+  as an anonymous or named function provided immediately below the roxygen2
+  comments section. (Function names are ignored if provided).
+  
+- `@description`: A description of the shortcut. Can be specified with the
+  roxygen tag or it can be the first paragraph of untagged text after the title
+  line.
+  
+- `@interactive`: Whether or not the shortcut's addin should be executed interactively.
+  
+  Non-interactive addins are run in the background, without alerting the user
+  and without providing a mechanism for the user to cancel the function.
+  
+  If the shortcut is interactive and calls a function stored in another package,
+  the code to execute the function will be displayed in the console, rather than
+  the placeholder shortcut from **shrtcts**.
+  
+- `@id`: An integer id (< 100) used to link the shortcut to a specific placeholder
+  function in **shrtcts**. For example, `#' @id 5` will link the provided
+  shortcut to `shrtcts:::shortcut_05()`. This is particularly useful if you
+  have a keyboard shortcut linked to your shortcut, although the need for this
+  tag is mitigated by the `@shortcut` tag.
+  
+- `@shortcut`: A combination of keys to be used as a keyboard shortcut in RStudio.
+  Keyboard shortcuts are only applied if `set_keyboard_shortcuts` is set when
+  calling [add_rstudio_shortcuts()]. This option is disabled by default.
