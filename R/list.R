@@ -3,7 +3,7 @@
 #' Lists all shortcuts declared in `.shrtcts.R` or `.shrtcts.yml`. Also lists
 #' the currently assigned RStudio keyboard shortcuts.
 #'
-#' @param path_shortcuts Path to `.shrtcts.R` or `.shrtcts.yml`. See [locate_shorcuts_source()] for more detail.
+#' @param path_shortcuts Path to `.shrtcts.R` or `.shrtcts.yml`. See [locate_shortcuts_source()] for more detail.
 #' @param path_addins_json Path to RStudio's `addins.json` keybindings config file. See [locate_addins_json()] for more detail.
 #'
 #' @examples
@@ -28,6 +28,7 @@ list_shortcuts <- function(path_shortcuts = NULL, path_addins_json = NULL) {
   shtcts <- parse_shortcuts(path_shortcuts)
   if (!length(shtcts)) {
     message("[shrtcts] No shortcuts.")
+    return(invisible(NULL))
   }
   shtcts <- lapply(shtcts, function(sh) {
     data.frame(

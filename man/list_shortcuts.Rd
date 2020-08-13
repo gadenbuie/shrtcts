@@ -7,7 +7,7 @@
 list_shortcuts(path_shortcuts = NULL, path_addins_json = NULL)
 }
 \arguments{
-\item{path_shortcuts}{Path to \code{.shrtcts.R} or \code{.shrtcts.yml}. See \code{\link[=locate_shorcuts_source]{locate_shorcuts_source()}} for more detail.}
+\item{path_shortcuts}{Path to \code{.shrtcts.R} or \code{.shrtcts.yml}. See \code{\link[=locate_shortcuts_source]{locate_shortcuts_source()}} for more detail.}
 
 \item{path_addins_json}{Path to RStudio's \code{addins.json} keybindings config file. See \code{\link[=locate_addins_json]{locate_addins_json()}} for more detail.}
 }
