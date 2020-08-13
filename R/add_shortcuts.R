@@ -74,14 +74,14 @@ example_shortcuts_r <- function() {
 #' Open the shrtcts Source File
 #'
 #' This helper function locates and opens (or returns the path to) the
-#' `.shrtcts.yml` file.
+#' `.shrtcts.R` or `.shrtcts.yml` file.
 #'
-#' @param open If `TRUE` and the `.shrtcts.yml` file is found, then the file is
-#'   opened via `file.edit()`. Otherwise, the path is returned.
+#' @param open If `TRUE` and the shrtcts source file is found (see [paths]),
+#'   then the file is opened via `file.edit()`. Otherwise, the path is returned.
 #' @inheritParams add_rstudio_shortcuts
 #'
-#' @return The path to the `.shrtcts.yml` source file (invisibly if the file is
-#'   opened).
+#' @return The path to the `.shrtcts.R` or `.shrtcts.yml` source file (invisibly
+#'  if the file is opened).
 #'
 #' @export
 edit_shortcuts <- function(open = TRUE, path = NULL) {
