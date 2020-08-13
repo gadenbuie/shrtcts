@@ -5,3 +5,6 @@
 ^\.ccache$
 ^\.github$
 ^tic\.R$
+^doc$
+^Meta$
+^pkgdown$
