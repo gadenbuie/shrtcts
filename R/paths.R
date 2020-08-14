@@ -65,8 +65,8 @@ path_shortcuts_source <- function() {
   dir <- try_dirs[fs::dir_exists(try_dirs)]
   if (!length(dir)) cant_path_shortcuts_source()
 
-  path_r <- fs::dir_ls(dir, regexp = "[.]shrtcts[.][rR]", all = TRUE)
-  path_yaml <- fs::dir_ls(dir, regexp = "[.]shrtcts[.]ya?ml", all = TRUE)
+  path_r <- fs::dir_ls(dir, regexp = "[.]shrtcts[.][rR]$", all = TRUE)
+  path_yaml <- fs::dir_ls(dir, regexp = "[.]shrtcts[.]ya?ml$", all = TRUE)
   paths <- c(path_r, path_yaml)
 
   if (!length(paths)) cant_path_shortcuts_source()
