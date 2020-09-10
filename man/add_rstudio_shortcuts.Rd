@@ -210,7 +210,7 @@ shortcut is a YAML list item with the following structure:\if{html}{\out{<div cl
 # Add shortcuts to ~/.shrtcts.yaml (see help above)
 
 # Add this to your ~/.Rprofile to automatically load shortcuts
-if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
+if (interactive() && requireNamespace("shrtcts", quietly = TRUE)) {
   shrtcts::add_rstudio_shortcuts()
 }
 
