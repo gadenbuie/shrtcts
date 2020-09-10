@@ -156,7 +156,7 @@ can set their names and even assign keyboard shortcuts to your shrtcts.
 See detailed sections below.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_rstudio_shortcuts</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>set_keyboard_shortcuts</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>add_rstudio_shortcuts</span>(path = <span class='kw'>NULL</span>, set_keyboard_shortcuts = <span class='fl'>FALSE</span>)
 
 <span class='fu'>example_shortcuts_yaml</span>()
 
@@ -183,7 +183,7 @@ keyboard shortcuts in <code>addins.json</code>.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     
-<h3>shrtcts R Format</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>shrtcts R Format</h3>
 
 
 <p>Use the following template to organize your <code>.shrtcts.R</code>. You can write
@@ -196,7 +196,8 @@ additional roxygen tags specifically for <strong>shrtcts</strong><div class="r">
 <span class='co'>#'</span>
 <span class='co'>#' @interactive</span>
 <span class='co'>#' @shortcut Ctrl+Alt+P</span>
-<span class='kw pkg'>praise</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/praise/man/praise.html'>praise</a></span></pre><p></div></p><h3>roxygen2 Tags</h3>
+<span class='kw'>praise</span>::<span class='kw'><a href='https://rdrr.io/pkg/praise/man/praise.html'>praise</a></span>
+</pre><p></div></p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>roxygen2 Tags</h4>
 
 
 <p><strong>shrtcts</strong> recognizes the following roxygen tags. Tags are optional
@@ -234,7 +235,7 @@ option is disabled by default.</p></li>
 
 
 
-<h3>Where to Store Your Shortcuts</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Where to Store Your Shortcuts</h3>
 
 
 <p>Save your shortcuts R (or YAML) file as <code>.shrtcts.R</code> or <code>.shrtcts.yml</code>
@@ -246,7 +247,7 @@ In other words: <code>~/.config/.shrtcts.R</code> or <code>~/.shrtcts.yml</code>
 confirm which file will be used by <strong>shrtcts</strong> – using
 <code><a href='paths.html'>locate_shortcuts_source()</a></code>.</p>
 
-<h3>Install Your Shortcuts</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Install Your Shortcuts</h3>
 
 
 <p>Run <code>add_rstudio_shortcuts()</code> to install your shortcuts. You’ll need to
@@ -261,19 +262,20 @@ setup, you can provide <code>set_keyboard_shortcuts</code> with the correct path
 complete restart of RStudio is required (hint: use
 <code>usethis:::restart_rstudio()</code>).</p>
 
-<h3>RStudio Keyboard Shortcuts</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>RStudio Keyboard Shortcuts</h3>
 
 
 <p>Once you’ve setup an RStudio Addin via <strong>shrtcts</strong>, there are two ways
 to link the shortcut’s addin to a keyboard shortcut.</p>
 <p>You can verify and list the current shortcuts and their keyboard
-bindings with <code><a href='list_shortcuts.html'>list_shortcuts()</a></code>.<div class="r"></p><pre><span class='kw pkg'>shrtcts</span><span class='kw ns'>::</span><span class='fu'><a href='list_shortcuts.html'>list_shortcuts</a></span>()</pre><p></div></p><pre>##                                name       addin shrtcts_keybinding rstudio_keybinding
-## 1                 10 random numbers shortcut_01               &amp;lt;NA&amp;gt;               &amp;lt;NA&amp;gt;
-## 2 New Temporary R Markdown Document shortcut_02   Ctrl+Alt+Shift+T   Ctrl+Alt+Shift+T
-## 3   A Random Number Between 0 and 1 shortcut_03               &amp;lt;NA&amp;gt;               &amp;lt;NA&amp;gt;
-## 4                Say Something Nice shortcut_97         Ctrl+Alt+P         Ctrl+Alt+P
+bindings with <code><a href='list_shortcuts.html'>list_shortcuts()</a></code>.<div class="r"></p><pre><span class='kw'>shrtcts</span>::<span class='fu'><a href='list_shortcuts.html'>list_shortcuts</a></span>()
+</pre><p></div></p><pre><span class='co'>##                                name       addin shrtcts_keybinding rstudio_keybinding</span>
+<span class='co'>## 1                 10 random numbers shortcut_01               &lt;NA&gt;               &lt;NA&gt;</span>
+<span class='co'>## 2 New Temporary R Markdown Document shortcut_02   Ctrl+Alt+Shift+T   Ctrl+Alt+Shift+T</span>
+<span class='co'>## 3   A Random Number Between 0 and 1 shortcut_03               &lt;NA&gt;               &lt;NA&gt;</span>
+<span class='co'>## 4                Say Something Nice shortcut_97         Ctrl+Alt+P         Ctrl+Alt+P</span>
 </pre>
-<h3>Declare Keyboard Shortcuts in <code>.shrtcts.R</code></h3>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Declare Keyboard Shortcuts in <code>.shrtcts.R</code></h4>
 
 
 <p>You can use the <code>@shortcut</code> tag to declare the shortcut in <code>.shrtcts.R</code>
@@ -287,7 +289,8 @@ overwritten, so you should choose one method or the other.</p><ul>
 <span class='co'>#' @description A demo of cool things</span>
 <span class='co'>#' @interactive</span>
 <span class='co'>#' @shortcut Ctrl+Alt+P</span>
-<span class='kw pkg'>praise</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/praise/man/praise.html'>praise</a></span></pre><p></div></p></li>
+<span class='kw'>praise</span>::<span class='kw'><a href='https://rdrr.io/pkg/praise/man/praise.html'>praise</a></span>
+</pre><p></div></p></li>
 <li><p><code>.shrtcts.yml</code><div class="yaml"></p><pre>- Name: Say Something Nice
   Description: A demo of cool things
   Binding: praise::praise
@@ -304,7 +307,7 @@ may want to double check the RStudio menu.</p>
 <code>addins.json.bak</code> in the same folder where <code>addins.json</code> was found. Use
 <code>location_addins_json()</code> to find this file.</p>
 
-<h3>Setting Keyboard Shortcuts via RStudio Menus</h3>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Setting Keyboard Shortcuts via RStudio Menus</h4>
 
 
 <p>You can create a keyboard shortcut for the addin using the <em>Tools</em> &gt;
@@ -317,7 +320,7 @@ name.</p>
 
 
 
-<h3>shrtcts YAML format</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>shrtcts YAML format</h3>
 
 
 <p><strong>shrtcts</strong> initially provided a way to specify the shortcuts in a YAML
@@ -351,9 +354,11 @@ shortcut is a YAML list item with the following structure:<div class="yaml"></p>
     <pre class="examples"><div class='input'><span class='co'># Add shortcuts to ~/.shrtcts.yaml (see help above)</span>
 
 <span class='co'># Add this to your ~/.Rprofile to automatically load shortcuts</span>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>() <span class='kw'>&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"shrtcts"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='kw pkg'>shrtcts</span><span class='kw ns'>::</span><span class='fu'>add_rstudio_shortcuts</span>()
-}</div></pre>
+<span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>() <span class='op'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"shrtcts"</span>, quietly = <span class='fl'>TRUE</span>)) {
+  <span class='kw'>shrtcts</span>::<span class='fu'>add_rstudio_shortcuts</span>()
+}
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -369,7 +374,7 @@ shortcut is a YAML list item with the following structure:<div class="yaml"></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

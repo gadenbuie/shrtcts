@@ -144,7 +144,7 @@ the currently assigned RStudio keyboard shortcuts." />
 the currently assigned RStudio keyboard shortcuts.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>list_shortcuts</span>(<span class='kw'>path_shortcuts</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>path_addins_json</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>list_shortcuts</span>(path_shortcuts = <span class='kw'>NULL</span>, path_addins_json = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,13 +170,15 @@ shortcut in RStudio.</p>
     <div class='dont-index'><p><code><a href='add_rstudio_shortcuts.html'>add_rstudio_shortcuts()</a></code>, <a href='paths.html'>paths</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (
-  <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>() <span class='kw'>&amp;&amp;</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"rstudioapi"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>&amp;&amp;</span>
-  <span class='kw pkg'>rstudioapi</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rstudioapi/man/hasFun.html'>hasFun</a></span>(<span class='st'>"versionInfo"</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (
+  <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>() <span class='op'>&amp;&amp;</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span>(<span class='st'>"rstudioapi"</span>, quietly = <span class='fl'>TRUE</span>) <span class='op'>&amp;&amp;</span>
+  <span class='kw'>rstudioapi</span>::<span class='fu'><a href='https://rdrr.io/pkg/rstudioapi/man/hasFun.html'>hasFun</a></span>(<span class='st'>"versionInfo"</span>)
  ) {
   <span class='fu'>list_shortcuts</span>()
-}</div></pre>
+}
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -192,7 +194,7 @@ shortcut in RStudio.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
