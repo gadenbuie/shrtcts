@@ -41,7 +41,7 @@ run `add_rstudio_shortcuts()` whenever you update your shortcuts.)
 
 ``` r
 # ~/.Rprofile
-if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
+if (interactive() && requireNamespace("shrtcts", quietly = TRUE)) {
   shrtcts::add_rstudio_shortcuts()
 }
 ```
@@ -51,7 +51,7 @@ shortcuts assignments.
 
 ``` r
 # ~/.Rprofile
-if (interactive() & requireNamespace("shrtcts", quietly = TRUE)) {
+if (interactive() && requireNamespace("shrtcts", quietly = TRUE)) {
   shrtcts::add_rstudio_shortcuts(set_keyboard_shortcuts = TRUE)
 }
 ```
