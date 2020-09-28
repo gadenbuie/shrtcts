@@ -112,22 +112,19 @@
 <span class="co">#'</span>
 <span class="co">#' @interactive</span>
 <span class="co">#' @shortcut Ctrl+Alt+P</span>
-<span class="kw">praise</span>::<span class="kw"><a href="https://rdrr.io/pkg/praise/man/praise.html">praise</a></span>
-</pre></div>
+<span class="fu">praise</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/praise/man/praise.html">praise</a></span></pre></div>
 <p>Then add the following lines to your <code>~/.Rprofile</code> , which you can find quickly with <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_profile()</a></code>. (Or you can skip this step and run <code><a href="../reference/add_rstudio_shortcuts.html">add_rstudio_shortcuts()</a></code> whenever you update your shortcuts.)</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="co"># ~/.Rprofile</span>
-<span class="co">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span>() <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"shrtcts"</span>, quietly = <span class="fl">TRUE</span>)) {
-  <span class="kw">shrtcts</span>::<span class="fu"><a href="../reference/add_rstudio_shortcuts.html">add_rstudio_shortcuts</a></span>()
-}
-</pre></div>
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"shrtcts"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">shrtcts</span><span class="fu">::</span><span class="fu"><a href="../reference/add_rstudio_shortcuts.html">add_rstudio_shortcuts</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span></pre></div>
 <p>You can also tell <strong>shrtcts</strong> to automatically update the keyboard shortcuts assignments.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="co"># ~/.Rprofile</span>
-<span class="co">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span>() <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"shrtcts"</span>, quietly = <span class="fl">TRUE</span>)) {
-  <span class="kw">shrtcts</span>::<span class="fu"><a href="../reference/add_rstudio_shortcuts.html">add_rstudio_shortcuts</a></span>(set_keyboard_shortcuts = <span class="fl">TRUE</span>)
-}
-</pre></div>
+<span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"shrtcts"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">shrtcts</span><span class="fu">::</span><span class="fu"><a href="../reference/add_rstudio_shortcuts.html">add_rstudio_shortcuts</a></span><span class="op">(</span>set_keyboard_shortcuts <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="op">}</span></pre></div>
 <p>After restarting your R session, you’ll find your new shortcut <strong>Say Something Nice</strong> in your RStudio Addins menu!</p>
 <center>
 <img src="../reference/figures/addin-nice.png" width="330px">
@@ -146,8 +143,7 @@
 <span class="co">#'</span>
 <span class="co">#' @interactive</span>
 <span class="co">#' @shortcut Ctrl+Alt+P</span>
-<span class="kw">praise</span>::<span class="kw"><a href="https://rdrr.io/pkg/praise/man/praise.html">praise</a></span>
-</pre></div>
+<span class="fu">praise</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/praise/man/praise.html">praise</a></span></pre></div>
 <div id="roxygen2-tags" class="section level3">
 <h3 class="hasAnchor">
 <a href="#roxygen2-tags" class="anchor"></a>roxygen2 Tags</h3>
@@ -184,13 +180,12 @@
 <p>Once you’ve setup an RStudio Addin via <strong>shrtcts</strong>, there are two ways to link the shortcut’s addin to a keyboard shortcut.</p>
 <p>You can verify and list the current shortcuts and their keyboard bindings with <a href="https://pkg.garrickadenbuie.com/shrtcts/reference/list_shortcuts.html">list_shortcuts()</a>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">shrtcts</span>::<span class="fu"><a href="../reference/list_shortcuts.html">list_shortcuts</a></span>()
+<span class="fu">shrtcts</span><span class="fu">::</span><span class="fu"><a href="../reference/list_shortcuts.html">list_shortcuts</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;                                name       addin shrtcts_keybinding rstudio_keybinding</span>
 <span class="co">#&gt; 1                 10 random numbers shortcut_01               &lt;NA&gt;               &lt;NA&gt;</span>
 <span class="co">#&gt; 2 New Temporary R Markdown Document shortcut_02   Ctrl+Alt+Shift+T   Ctrl+Alt+Shift+T</span>
 <span class="co">#&gt; 3   A Random Number Between 0 and 1 shortcut_03               &lt;NA&gt;               &lt;NA&gt;</span>
-<span class="co">#&gt; 4                Say Something Nice shortcut_97         Ctrl+Alt+P         Ctrl+Alt+P</span>
-</pre></div>
+<span class="co">#&gt; 4                Say Something Nice shortcut_97         Ctrl+Alt+P         Ctrl+Alt+P</span></pre></div>
 <div id="declare-keyboard-shortcuts-in--shrtcts-r" class="section level3">
 <h3 class="hasAnchor">
 <a href="#declare-keyboard-shortcuts-in--shrtcts-r" class="anchor"></a>Declare Keyboard Shortcuts in <code>.shrtcts.R</code>
@@ -206,8 +201,7 @@
 <span class="co">#' @description A demo of cool things</span>
 <span class="co">#' @interactive</span>
 <span class="co">#' @shortcut Ctrl+Alt+P</span>
-<span class="kw">praise</span>::<span class="kw"><a href="https://rdrr.io/pkg/praise/man/praise.html">praise</a></span>
-</pre></div>
+<span class="fu">praise</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/praise/man/praise.html">praise</a></span></pre></div>
 </li>
 <li>
 <p><code>.shrtcts.yml</code></p>
