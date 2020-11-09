@@ -101,34 +101,34 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install <code>shrtcts</code> from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gadenbuie/shrtcts"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"gadenbuie/shrtcts"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="quick-intro" class="section level2">
 <h2 class="hasAnchor">
 <a href="#quick-intro" class="anchor"></a>Quick Intro</h2>
 <p>Store your shortcuts in <code>~/.config/.shrtcts.R</code> or <code>~/.shrtcts.R</code>. Each shortcut should look something like the example below, but you can include <em>any R code you want</em> as the shortcut, as long as it’s a function.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co">#' Say Something Nice</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#' Say Something Nice</span>
 <span class="co">#'</span>
 <span class="co">#' A demo of cool things.</span>
 <span class="co">#'</span>
 <span class="co">#' @interactive</span>
 <span class="co">#' @shortcut Ctrl+Alt+P</span>
-<span class="fu">praise</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/praise/man/praise.html">praise</a></span></pre></div>
+<span class="fu">praise</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/praise/man/praise.html">praise</a></span></code></pre></div>
 <p>Then add the following lines to your <code>~/.Rprofile</code> , which you can find quickly with <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_profile()</a></code>. (Or you can skip this step and run <code><a href="reference/add_rstudio_shortcuts.html">add_rstudio_shortcuts()</a></code> whenever you update your shortcuts.)</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="co"># ~/.Rprofile</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ~/.Rprofile</span>
 <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"shrtcts"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu">shrtcts</span><span class="fu">::</span><span class="fu"><a href="reference/add_rstudio_shortcuts.html">add_rstudio_shortcuts</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">}</span></pre></div>
+<span class="op">}</span></code></pre></div>
 <p>You can also tell <strong>shrtcts</strong> to automatically update the keyboard shortcuts assignments.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co"># ~/.Rprofile</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># ~/.Rprofile</span>
 <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"shrtcts"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu">shrtcts</span><span class="fu">::</span><span class="fu"><a href="reference/add_rstudio_shortcuts.html">add_rstudio_shortcuts</a></span><span class="op">(</span>set_keyboard_shortcuts <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="op">}</span></pre></div>
+<span class="op">}</span></code></pre></div>
 <p>After restarting your R session, you’ll find your new shortcut <strong>Say Something Nice</strong> in your RStudio Addins menu!</p>
 <center>
 <p><img src="reference/figures/addin-nice.png" width="330px"></p>
