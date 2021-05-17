@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   shrtcts: shrtcts.html
-last_built: 2021-05-03T04:16Z
+last_built: 2021-05-17T04:24Z
 urls:
   reference: https://pkg.garrickadenbuie.com/shrtcts//reference
   article: https://pkg.garrickadenbuie.com/shrtcts//articles
