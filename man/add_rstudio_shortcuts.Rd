@@ -53,7 +53,8 @@ praise::praise
 unless otherwise specified.
 \itemize{
 \item \verb{@title} (required): The name of the shortcut’s addin in RStudio.
-The tag itself is not required, the first line of untagged text (\verb{#' Say Something Nice} above) is interpreted as the title.
+The tag itself is not required, the first line of untagged text
+(\verb{#' Say Something Nice} above) is interpreted as the title.
 \item A \emph{function}, either exported from another package,
 e.g. \code{praise::praise} or as an anonymous or named function provided
 immediately below the roxygen2 comments section. (Function names are
@@ -73,15 +74,16 @@ another package, the code to execute the function will be displayed
 in the console, rather than the placeholder shortcut from
 \strong{shrtcts}.
 \item \verb{@id}: An integer id (< 100) used to link the shortcut to a
-specific placeholder function in \strong{shrtcts}. For example, \verb{#' @id 5} will link the provided shortcut to \code{shrtcts:::shortcut_05()}.
-This is particularly useful if you have a keyboard shortcut linked
-to your shortcut, although the need for this tag is mitigated by the
-\verb{@shortcut} tag.
+specific placeholder function in \strong{shrtcts}. For example,
+\verb{#' @id 5} will link the provided shortcut to
+\code{shrtcts:::shortcut_05()}. This is particularly useful if you have a
+keyboard shortcut linked to your shortcut, although the need for
+this tag is mitigated by the \verb{@shortcut} tag.
 \item \verb{@shortcut}: A combination of keys to be used as a keyboard shortcut
 in RStudio. Keyboard shortcuts are only applied if
 \code{set_keyboard_shortcuts} is set when calling
-\code{\link[=add_rstudio_shortcuts]{add_rstudio_shortcuts()}}. This
-option is disabled by default.
+\code{\link[=add_rstudio_shortcuts]{add_rstudio_shortcuts()}}. This option is
+disabled by default.
 }
 }
 
@@ -92,8 +94,8 @@ option is disabled by default.
 Save your shortcuts R (or YAML) file as \code{.shrtcts.R} or \code{.shrtcts.yml}
 in your home directory or in the \code{.config} directory in your home
 directory — use \code{\link[fs:path_expand]{fs::path_home_r()}} or
-\code{\link[fs:path_expand]{fs::path_home()}} to locate your home directory.
-In other words: \verb{~/.config/.shrtcts.R} or \verb{~/.shrtcts.yml}.
+\code{\link[fs:path_expand]{fs::path_home()}} to locate your home directory. In
+other words: \verb{~/.config/.shrtcts.R} or \verb{~/.shrtcts.yml}.
 
 You can test that \strong{shrtcts} correctly finds your shortcuts file – or
 confirm which file will be used by \strong{shrtcts} – using

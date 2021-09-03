@@ -14,6 +14,7 @@ An easily customizable method for creating RStudio
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://pkg.garrickadenbuie.com/shrtcts}
   \item \url{https://github.com/gadenbuie/shrtcts}
   \item Report bugs at \url{https://github.com/gadenbuie/shrtcts/issues}
 }
