@@ -83,7 +83,7 @@ maybe_create_shortcuts_file <- function(dir = rappdirs::user_config_dir("shrtcts
   if (fs::file_exists(path)) return()
   msg <- sprintf("Would you like to create a new shrtcts file at '%s'", path)
   if (isTRUE(utils::askYesNo(msg))) {
-    fs::dir_create(fs::path_dir(path), recursive = TRUE)
+    fs::dir_create(fs::path_dir(path), recurse = TRUE)
     fs::file_touch(path)
     return(path)
   }
