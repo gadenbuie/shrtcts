@@ -58,6 +58,7 @@ locate_shortcuts_source <- function(path = NULL, all = FALSE) {
 #nocov start
 path_shortcuts_source <- function() {
   try_dirs <- c(
+    rappdirs::user_config_dir("shrtcts"),
     fs::path_home_r(c(".config", "")),
     fs::path_home(c(".config", ""))
   )
@@ -69,14 +70,30 @@ path_shortcuts_source <- function() {
   path_yaml <- fs::dir_ls(dir, regexp = "[.]shrtcts[.]ya?ml$", all = TRUE)
   paths <- c(path_r, path_yaml)
 
-  if (!length(paths)) cant_path_shortcuts_source()
+  if (!length(paths)) {
+    paths <- maybe_create_shortcuts_file(try_dirs)
+  }
 
   unname(paths)
+}
+
+maybe_create_shortcuts_file <- function(dir = rappdirs::user_config_dir("shrtcts")) {
+  dir <- dir[1]
+  path <- fs::path(dir, ".shrtcts.R")
+  if (fs::file_exists(path)) return()
+  msg <- sprintf("Would you like to create a new shrtcts file at '%s'", path)
+  if (isTRUE(utils::askYesNo(msg))) {
+    fs::dir_create(fs::path_dir(path), recursive = TRUE)
+    fs::file_touch(path)
+    return(path)
+  }
+  cant_path_shortcuts_source()
 }
 
 cant_path_shortcuts_source <- function() {
   stop(
     "Could not find .shrtcts.R or .shrtcts.yaml in ",
+    rappdirs::user_config_dir("shrtcts"), ", ",
     fs::path_home_r(".config"),
     " or ",
     fs::path_home_r(),

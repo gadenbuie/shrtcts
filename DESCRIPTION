@@ -17,6 +17,7 @@ BugReports: https://github.com/gadenbuie/shrtcts/issues
 Imports: 
     fs,
     jsonlite,
+    rappdirs,
     roxygen2,
     rstudioapi,
     utils,
