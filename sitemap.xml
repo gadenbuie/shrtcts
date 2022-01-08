@@ -1,24 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://pkg.garrickadenbuie.com/shrtcts//index.html</loc>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/404.html</loc>
   </url>
   <url>
-    <loc>https://pkg.garrickadenbuie.com/shrtcts//reference/add_rstudio_shortcuts.html</loc>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://pkg.garrickadenbuie.com/shrtcts//reference/edit_shortcuts.html</loc>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://pkg.garrickadenbuie.com/shrtcts//reference/list_shortcuts.html</loc>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://pkg.garrickadenbuie.com/shrtcts//reference/paths.html</loc>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/articles/shrtcts.html</loc>
   </url>
   <url>
-    <loc>https://pkg.garrickadenbuie.com/shrtcts//reference/shrtcts-package.html</loc>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/authors.html</loc>
   </url>
   <url>
-    <loc>https://pkg.garrickadenbuie.com/shrtcts//articles/shrtcts.html</loc>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/index.html</loc>
+  </url>
+  <url>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/reference/add_rstudio_shortcuts.html</loc>
+  </url>
+  <url>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/reference/edit_shortcuts.html</loc>
+  </url>
+  <url>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/reference/list_shortcuts.html</loc>
+  </url>
+  <url>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/reference/paths.html</loc>
+  </url>
+  <url>
+    <loc>https://pkg.garrickadenbuie.com/shrtcts/reference/shrtcts-package.html</loc>
   </url>
 </urlset>
