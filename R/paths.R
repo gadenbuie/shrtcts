@@ -68,6 +68,10 @@ path_shortcuts_source <- function() {
   path_yaml <- fs::dir_ls(dir, regexp = "[.]shrtcts[.]ya?ml$", all = TRUE)
   paths <- c(path_r, path_yaml)
 
+  if (!length(paths)) {
+    cant_path_shortcuts_source()
+  }
+
   unname(paths)
 }
 
