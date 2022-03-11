@@ -39,7 +39,7 @@ add_rstudio_shortcuts <- function(path = NULL, set_keyboard_shortcuts = FALSE) {
   if (!is_interactive()) return(invisible())
 
   path <- tryCatch(
-    locate_shortcuts_source(path),
+    locate_shortcuts_source(path) %||% cant_path_shortcuts_source(),
     error = function(err) {
       message("[shrtcts] ", conditionMessage(err))
       NULL

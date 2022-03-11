@@ -42,7 +42,10 @@ locate_shortcuts_source <- function(path = NULL, all = FALSE) {
     }
     options("shrtcts.path" = path)
   }
-  path <- path %||% path_shortcuts_source() %||% cant_path_shortcuts_source()
+  path <- path %||% path_shortcuts_source()
+  if (is.null(path)) {
+    return(NULL)
+  }
   if (isTRUE(all)) {
     return(path)
   }
