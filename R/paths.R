@@ -44,6 +44,7 @@ locate_shortcuts_source <- function(path = NULL, all = FALSE) {
   }
   if (is.null(path)) {
     path <- path_shortcuts_source()
+    if (is.null(path)) return(invisible())
   }
   if (isTRUE(all)) {
     return(path)
@@ -81,6 +82,11 @@ maybe_create_shortcuts_file <- function(dir = rappdirs::user_config_dir("shrtcts
   dir <- dir[1]
   path <- fs::path(dir, ".shrtcts.R")
   if (fs::file_exists(path)) return()
+  if (!interactive()) {
+    err <- tryCatch(cant_path_shortcuts_source(), error = indentity)
+    message(conditionMessage(err))
+    return(invisible())
+  }
   msg <- sprintf("Would you like to create a new shrtcts file at '%s'", path)
   if (isTRUE(utils::askYesNo(msg))) {
     fs::dir_create(fs::path_dir(path), recurse = TRUE)
