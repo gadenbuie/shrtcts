@@ -86,6 +86,9 @@ example_shortcuts_r <- function() {
 #' @export
 edit_shortcuts <- function(open = TRUE, path = NULL) {
   path <- locate_shortcuts_source(path)
+  if (is.null(path)) {
+    path <- maybe_create_shortcuts_file()
+  }
   if (isTRUE(open)) {
     if (
       requireNamespace("rstudioapi", quietly = TRUE) &&
