@@ -45,7 +45,7 @@ add_rstudio_shortcuts <- function(path = NULL, set_keyboard_shortcuts = FALSE) {
       NULL
     }
   )
-  if (is.null(path)) return()
+  if (is.null(path)) return(invisible())
 
   shortcuts <- parse_shortcuts(path)
 
