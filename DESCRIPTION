@@ -1,7 +1,7 @@
 Package: shrtcts
 Title: Make Anything an RStudio Shortcut
-Version: 0.1.1
-Authors@R: 
+Version: 0.1.2
+Authors@R:
     person(given = "Garrick",
            family = "Aden-Buie",
            role = c("aut", "cre"),
@@ -14,7 +14,7 @@ Description: An easily customizable method for creating RStudio
 License: MIT + file LICENSE
 URL: https://pkg.garrickadenbuie.com/shrtcts, https://github.com/gadenbuie/shrtcts
 BugReports: https://github.com/gadenbuie/shrtcts/issues
-Imports: 
+Imports:
     fs,
     jsonlite,
     rappdirs,
@@ -22,7 +22,7 @@ Imports:
     rstudioapi,
     utils,
     yaml
-Suggests: 
+Suggests:
     testthat (>= 2.1.0),
     knitr,
     rmarkdown
