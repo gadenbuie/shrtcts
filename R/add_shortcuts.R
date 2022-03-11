@@ -38,7 +38,14 @@
 add_rstudio_shortcuts <- function(path = NULL, set_keyboard_shortcuts = FALSE) {
   if (!is_interactive()) return(invisible())
 
-  path <- locate_shortcuts_source(path)
+  path <- tryCatch(
+    locate_shortcuts_source(path) %||% cant_path_shortcuts_source(),
+    error = function(err) {
+      message("[shrtcts] ", conditionMessage(err))
+      NULL
+    }
+  )
+  if (is.null(path)) return(invisible())
 
   shortcuts <- parse_shortcuts(path)
 
@@ -86,6 +93,9 @@ example_shortcuts_r <- function() {
 #' @export
 edit_shortcuts <- function(open = TRUE, path = NULL) {
   path <- locate_shortcuts_source(path)
+  if (is.null(path)) {
+    path <- maybe_create_shortcuts_file()
+  }
   if (isTRUE(open)) {
     if (
       requireNamespace("rstudioapi", quietly = TRUE) &&

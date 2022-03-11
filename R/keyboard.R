@@ -18,7 +18,7 @@ write_keyboard_shortcuts <- function(shortcuts, path = NULL) {
     kbd_shrtcts[[sh_id]] <- sh[[i]][["shortcut"]]
   }
 
-  path <- locate_addins_json(path)
+  path <- locate_addins_json(path) %||% cant_path_shortcuts_source()
 
   kbd_rstudio <- jsonlite::fromJSON(path, simplifyVector = FALSE)
 

@@ -42,8 +42,9 @@ locate_shortcuts_source <- function(path = NULL, all = FALSE) {
     }
     options("shrtcts.path" = path)
   }
+  path <- path %||% path_shortcuts_source()
   if (is.null(path)) {
-    path <- path_shortcuts_source()
+    return(NULL)
   }
   if (isTRUE(all)) {
     return(path)
@@ -64,15 +65,13 @@ path_shortcuts_source <- function() {
   )
   try_dirs <- unique(try_dirs)
   dir <- try_dirs[fs::dir_exists(try_dirs)]
-  if (!length(dir)) cant_path_shortcuts_source()
+  if (!length(dir)) return(NULL)
 
   path_r <- fs::dir_ls(dir, regexp = "[.]shrtcts[.][rR]$", all = TRUE)
   path_yaml <- fs::dir_ls(dir, regexp = "[.]shrtcts[.]ya?ml$", all = TRUE)
   paths <- c(path_r, path_yaml)
 
-  if (!length(paths)) {
-    paths <- maybe_create_shortcuts_file(try_dirs)
-  }
+  if (!length(paths)) return(NULL)
 
   unname(paths)
 }
@@ -81,11 +80,13 @@ maybe_create_shortcuts_file <- function(dir = rappdirs::user_config_dir("shrtcts
   dir <- dir[1]
   path <- fs::path(dir, ".shrtcts.R")
   if (fs::file_exists(path)) return()
-  msg <- sprintf("Would you like to create a new shrtcts file at '%s'", path)
-  if (isTRUE(utils::askYesNo(msg))) {
-    fs::dir_create(fs::path_dir(path), recurse = TRUE)
-    fs::file_touch(path)
-    return(path)
+  if (interactive()) {
+    msg <- sprintf("Would you like to create a new shrtcts file at '%s'", path)
+    if (isTRUE(utils::askYesNo(msg))) {
+      fs::dir_create(fs::path_dir(path), recurse = TRUE)
+      fs::file_touch(path)
+      return(path)
+    }
   }
   cant_path_shortcuts_source()
 }
