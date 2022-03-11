@@ -38,7 +38,14 @@
 add_rstudio_shortcuts <- function(path = NULL, set_keyboard_shortcuts = FALSE) {
   if (!is_interactive()) return(invisible())
 
-  path <- locate_shortcuts_source(path)
+  path <- tryCatch(
+    locate_shortcuts_source(path),
+    error = function(err) {
+      message(conditionMessage(err))
+      NULL
+    }
+  )
+  if (is.null(path)) return()
 
   shortcuts <- parse_shortcuts(path)
 
