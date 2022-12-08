@@ -60,4 +60,4 @@ jobs:
         with:
           token: ${{ secrets.GADENBUIE_STATUS }}
           event-type: status-update
-          repository: gadenbuie/status
+          repository: gadenbuie/shrtcts
