@@ -1,0 +1,107 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+on:
+  push:
+    tags: 'v*'
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+    paths:
+      - 'man/**'
+      - 'pkgdown/**'
+      - 'vignettes/**'
+  workflow_dispatch:
+
+name: pkgdown
+
+jobs:
+  pkgdown:
+    if: ${{ !(github.event_name == 'pull_request' && github.event.action == 'closed') }}
+    runs-on: ubuntu-latest
+
+    # Only restrict concurrency for non-PR jobs
+    concurrency:
+      group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::pkgdown, local::.
+          needs: website
+
+      - name: Build site
+        run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
+        shell: Rscript {0}
+
+      - name: Set site deploy subdirectory
+        run: |
+          if [[ -d docs/dev ]]; then
+            srcdir=docs/dev
+            targetdir=dev
+          else
+            srcdir=docs/
+            targetdir=.
+          fi
+          if [[ $GITHUB_REF == refs/tags/v* ]]; then
+            # If event is a version tag event, set targetdir to '<tag_name>'
+            targetdir=${GITHUB_REF#refs/tags/}
+          elif [[ $GITHUB_REF == refs/pull/* ]]; then
+            # If PR, set targetdir to 'preview/pr<number>'
+            targetdir=preview/pr${{ github.event.pull_request.number }}
+          fi
+          echo "Deploying site from $srcdir to $targetdir on gh-pages"
+          echo "srcdir=$srcdir" >> $GITHUB_ENV
+          echo "targetdir=$targetdir" >> $GITHUB_ENV
+
+      - name: Deploy to GitHub pages 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          clean-exclude: |
+            preview/
+            v*/
+            dev/
+          branch: gh-pages
+          folder: ${{ env.srcdir }}
+          target-folder: ${{ env.targetdir }}
+
+  pkgdown-clean:
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
+    runs-on: ubuntu-latest
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: "gh-pages"
+
+      - name: Clean up PR Preview
+        run: |
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          preview_dir="preview/pr${{ github.event.pull_request.number }}"
+          if [ -d "$preview_dir" ]; then
+            git rm -r $preview_dir
+            git commit -m "Remove $preview_dir (GitHub Actions)" || echo 'No preview to remove'
+            git push origin || echo 'No preview to remove'
+          else
+            echo 'No preview to remove'
+          fi
+
