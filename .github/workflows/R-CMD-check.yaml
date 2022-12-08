@@ -51,13 +51,8 @@ jobs:
         with:
           upload-snapshots: true
 
-      - name: "[Status] Update dashboard at gadenbuie/status"
-        uses: peter-evans/repository-dispatch@v1
-        if: |
-          (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') &&
-          matrix.config.os == 'ubuntu-latest' &&
-          matrix.config.r == 'release'
+      - name: Update status dashboard
+        uses: gadenbuie/status/actions/status-update-rcmdcheck@main
         with:
-          token: ${{ secrets.GADENBUIE_STATUS }}
-          event-type: status-update
-          repository: gadenbuie/shrtcts
+          github-token-repo-scope: ${{ secrets.GADENBUIE_STATUS }}
+          status-repo: gadenbuie/status
