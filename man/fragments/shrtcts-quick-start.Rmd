@@ -50,7 +50,7 @@ you'll find your new shortcut
 **Say Something Nice**
 in your RStudio Addins menu!
 
-<center><img src="`r fig_path`/addin-nice.png" width="330px"/></center>
+<center><img src="`r fig_path`/addin-nice.png" width="330px" alt="RStudio addins menu with 'nice' as the search term, showing the 'Say Something Nice' addin from shrtcts."/></center>
 
 If you enabled keyboard shortcut management, 
 you'll also be able to run your new shortcut by pressing
