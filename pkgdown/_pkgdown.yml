@@ -80,6 +80,7 @@ navbar:
 reference:
 - title: All functions
   contents:
+  - '`shortcut_run`'
   - '`add_rstudio_shortcuts`'
   - '`list_shortcuts`'
   - '`edit_shortcuts`'
