@@ -154,7 +154,7 @@ function</p>
 <span></span>
 <span><span class="co">#' Have a cow say something nice</span></span>
 <span><span class="va">cow_say_praise</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu">cowsay</span><span class="fu">::</span><span class="fu">say</span><span class="op">(</span><span class="fu">praise</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">cowsay</span><span class="fu">::</span><span class="fu"><a href="https://sckott.github.io/cowsay/reference/say.html" class="external-link">say</a></span><span class="op">(</span><span class="fu">praise</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre><p></p></div>
 <p>you can use</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/shortcut_run.html">shortcut_run</a></span><span class="op">(</span><span class="st">"cow_say_praise"</span><span class="op">)</span></span></code></pre><p></p></div>
@@ -242,12 +242,34 @@ script; the YAML shortcuts syntax is not supported.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run the `cow_say_praise` shortcut by name</span></span></span>
 <span class="r-in"><span><span class="fu">shortcut_run</span><span class="op">(</span><span class="st">"cow_say_praise"</span>, .path_shortcuts <span class="op">=</span> <span class="va">tmp_shortcuts</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘cowsay’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ------------------ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt; You are kickass! &gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ------------------ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       \</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        \</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ^__^ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         (oo)\ ________ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         (__)\         )\ /\ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              ||------w|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              ||      ||</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get the `cow_say_praise` shortcut</span></span></span>
 <span class="r-in"><span><span class="va">cow_praise</span> <span class="op">&lt;-</span> <span class="fu">shortcut_get</span><span class="op">(</span><span class="st">"cow_say_praise"</span>, <span class="va">tmp_shortcuts</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">cow_praise</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in loadNamespace(x):</span> there is no package called ‘cowsay’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ------------------- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt; You are ultimate! &gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ------------------- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       \</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        \</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ^__^ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         (oo)\ ________ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         (__)\         )\ /\ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              ||------w|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              ||      ||</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
