@@ -1,13 +1,16 @@
-
 write_keyboard_shortcuts <- function(shortcuts, path = NULL) {
   stopifnot(is_shrtcts(shortcuts))
 
   # has a kbd shortcut if $shortcut is non-empty, non-zero string
-  has_kbd <- vapply(shortcuts, function(x) {
-    has_entry <- !is.null(x$shortcut) && is.character(x$shortcut)
-    if (!has_entry) return(FALSE)
-    nzchar(x$shortcut) && length(x$shortcut) == 1
-  }, logical(1))
+  has_kbd <- vapply(
+    shortcuts,
+    function(x) {
+      has_entry <- !is.null(x$shortcut) && is.character(x$shortcut)
+      if (!has_entry) return(FALSE)
+      nzchar(x$shortcut) && length(x$shortcut) == 1
+    },
+    logical(1)
+  )
 
   if (!any(has_kbd)) return()
 
@@ -40,7 +43,9 @@ write_keyboard_shortcuts <- function(shortcuts, path = NULL) {
 
   fs::file_copy(path, paste0(path, ".bak"), overwrite = TRUE)
   write_json(kbd_new, path)
-  message("[shrtcts] Keyboard shortcuts were updated. Restart RStudio to enable.")
+  message(
+    "[shrtcts] Keyboard shortcuts were updated. Restart RStudio to enable."
+  )
 
   invisible(path)
 }
