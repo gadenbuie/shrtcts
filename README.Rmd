@@ -23,6 +23,7 @@ Sys.setenv(IN_README = "TRUE")
 # shrtcts
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/gadenbuie/shrtcts/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gadenbuie/shrtcts/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 **shrtcts** lets you make anything an RStudio shortcut!
