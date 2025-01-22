@@ -1,9 +1,9 @@
 parse_shortcuts <- function(path) {
   switch(
     fs::path_ext(path),
-    R =,
+    R = ,
     r = parse_shortcuts_r(path),
-    yaml =,
+    yaml = ,
     yml = parse_shortcuts_yaml(path),
     stop("Unknown s")
   )
@@ -26,7 +26,6 @@ roxy_tag_parse.roxy_tag_interactive <- function(x) {
 }
 
 parse_shortcuts_r <- function(path) {
-
   x <- roxygen2::parse_file(path)
 
   no_call <- vapply(x, function(sh) is.null(sh$call), logical(1))
@@ -64,7 +63,10 @@ parse_shortcuts_r <- function(path) {
 discard_function_name <- function(x) {
   if (is.character(x)) {
     x <- trimws(x)
-    if (!is_likely_packaged_fn(x) && !grepl("function", strsplit(x, "\n")[[1]][[1]])) {
+    if (
+      !is_likely_packaged_fn(x) &&
+        !grepl("function", strsplit(x, "\n")[[1]][[1]])
+    ) {
       x <- paste0("function() {\n", x, "\n}")
     }
     x <- parse(text = x)[[1]]
@@ -99,15 +101,17 @@ parse_shortcuts_yaml <- function(path) {
       shortcut[["Interactive"]] <- TRUE
     }
     if ("shortcut" %in% tolower(names(shortcut))) {
-      names(shortcut)[which(tolower(names(shortcut)) == "shortcut")] <- "shortcut"
+      names(shortcut)[
+        which(tolower(names(shortcut)) == "shortcut")
+      ] <- "shortcut"
     }
     shortcut
   })
   structure(x, class = c("shrtcts_yaml", "shrtcts", "list"))
 }
 
-is_shrtcts      <- function(x) inherits(x, "shrtcts")
-is_shrtcts_r    <- function(x) inherits(x, "shrtcts_r")
+is_shrtcts <- function(x) inherits(x, "shrtcts")
+is_shrtcts_r <- function(x) inherits(x, "shrtcts_r")
 is_shrtcts_yaml <- function(x) inherits(x, "shrtcts_yaml")
 
 add_shortcut_ids <- function(x) {

@@ -69,17 +69,21 @@ navbar:
     github:
       icon: fab fa-github fa-lg
       href: https://github.com/gadenbuie/shrtcts
+      aria-label: shrtcts on GitHub
     garrick:
       icon: fas fa-home fa-lg
       href: https://garrickadenbuie.com
       title: Garrick Aden-Buie
+      aria-label: Garrick's home page
     twitter:
-      icon: fab fa-twitter fa-lg
-      href: https://twitter.com/grrrck
+      icon: fab fa-bluesky fa-lg
+      href: https://bsky.app/profile/grrrck.xyz
+      aria-label: Garrick on Bluesky
 
 reference:
 - title: All functions
   contents:
+  - '`shortcut_run`'
   - '`add_rstudio_shortcuts`'
   - '`list_shortcuts`'
   - '`edit_shortcuts`'

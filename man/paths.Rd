@@ -24,12 +24,12 @@ behavior of these functions.
 }
 \section{Functions}{
 \itemize{
-\item \code{locate_shortcuts_source}: Find the path to \code{.shrtcts.R} or \code{.shrtcts.yml}.
+\item \code{locate_shortcuts_source()}: Find the path to \code{.shrtcts.R} or \code{.shrtcts.yml}.
 
-\item \code{locate_addins_json}: Find the path to \code{addins.json}, the RStudio configuration
+\item \code{locate_addins_json()}: Find the path to \code{addins.json}, the RStudio configuration
 file containing keyboard shortcuts for addins
-}}
 
+}}
 \section{Options}{
 
 

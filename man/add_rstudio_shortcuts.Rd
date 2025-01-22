@@ -39,7 +39,9 @@ Use the following template to organize your \code{.shrtcts.R}. You can write
 each shortcut in regular R code, annotated with
 \href{https://roxygen2.r-lib.org/}{roxygen2} inline documentation comments.
 The comment format uses standard roxygen2 formatting, with a few
-additional roxygen tags specifically for \strong{shrtcts}\if{html}{\out{<div class="r">}}\preformatted{#' Say Something Nice
+additional roxygen tags specifically for \strong{shrtcts}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{#' Say Something Nice
 #'
 #' A demo of cool things.
 #'
@@ -52,8 +54,8 @@ praise::praise
 \strong{shrtcts} recognizes the following roxygen tags. Tags are optional
 unless otherwise specified.
 \itemize{
-\item \verb{@title} (required): The name of the shortcut’s addin in RStudio.
-The tag itself is not required, the first line of untagged text
+\item \verb{@title} (required): The name of the shortcut’s addin in RStudio. The
+tag itself is not required, the first line of untagged text
 (\verb{#' Say Something Nice} above) is interpreted as the title.
 \item A \emph{function}, either exported from another package,
 e.g. \code{praise::praise} or as an anonymous or named function provided
@@ -62,23 +64,22 @@ ignored if provided).
 \item \verb{@description}: A description of the shortcut. Can be specified with
 the roxygen tag or it can be the first paragraph of untagged text
 after the title line.
-\item \verb{@interactive}: Whether or not the shortcut’s addin should be
-executed interactively.
+\item \verb{@interactive}: Whether or not the shortcut’s addin should be executed
+interactively.
 
-Non-interactive addins are run in the background, without alerting
-the user and without providing a mechanism for the user to cancel
-the function.
+Non-interactive addins are run in the background, without alerting the
+user and without providing a mechanism for the user to cancel the
+function.
 
-If the shortcut is interactive and calls a function stored in
-another package, the code to execute the function will be displayed
-in the console, rather than the placeholder shortcut from
-\strong{shrtcts}.
-\item \verb{@id}: An integer id (< 100) used to link the shortcut to a
-specific placeholder function in \strong{shrtcts}. For example,
-\verb{#' @id 5} will link the provided shortcut to
-\code{shrtcts:::shortcut_05()}. This is particularly useful if you have a
-keyboard shortcut linked to your shortcut, although the need for
-this tag is mitigated by the \verb{@shortcut} tag.
+If the shortcut is interactive and calls a function stored in another
+package, the code to execute the function will be displayed in the
+console, rather than the placeholder shortcut from \strong{shrtcts}.
+\item \verb{@id}: An integer id (< 100) used to link the shortcut to a specific
+placeholder function in \strong{shrtcts}. For example, \verb{#' @id 5} will link
+the provided shortcut to \code{shrtcts:::shortcut_05()}. This is
+particularly useful if you have a keyboard shortcut linked to your
+shortcut, although the need for this tag is mitigated by the
+\verb{@shortcut} tag.
 \item \verb{@shortcut}: A combination of keys to be used as a keyboard shortcut
 in RStudio. Keyboard shortcuts are only applied if
 \code{set_keyboard_shortcuts} is set when calling
@@ -124,13 +125,17 @@ Once you’ve setup an RStudio Addin via \strong{shrtcts}, there are two ways
 to link the shortcut’s addin to a keyboard shortcut.
 
 You can verify and list the current shortcuts and their keyboard
-bindings with \code{\link[=list_shortcuts]{list_shortcuts()}}.\if{html}{\out{<div class="r">}}\preformatted{shrtcts::list_shortcuts()
-}\if{html}{\out{</div>}}\preformatted{##                                name       addin shrtcts_keybinding rstudio_keybinding
+bindings with \code{\link[=list_shortcuts]{list_shortcuts()}}.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{shrtcts::list_shortcuts()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{##                                name       addin shrtcts_keybinding rstudio_keybinding
 ## 1                 10 random numbers shortcut_01               <NA>               <NA>
 ## 2 New Temporary R Markdown Document shortcut_02   Ctrl+Alt+Shift+T   Ctrl+Alt+Shift+T
 ## 3   A Random Number Between 0 and 1 shortcut_03               <NA>               <NA>
 ## 4                Say Something Nice shortcut_97         Ctrl+Alt+P         Ctrl+Alt+P
-}
+}\if{html}{\out{</div>}}
 \subsection{Declare Keyboard Shortcuts in \code{.shrtcts.R}}{
 
 You can use the \verb{@shortcut} tag to declare the shortcut in \code{.shrtcts.R}
@@ -141,14 +146,18 @@ To update the keyboard shortcuts (for shrtcts only!), set
 If you use this method, shortcuts set manually in RStudio will be
 overwritten, so you should choose one method or the other.
 \itemize{
-\item \code{.shrtcts.R}\if{html}{\out{<div class="r">}}\preformatted{#' Say Something Nice
+\item \code{.shrtcts.R}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{#' Say Something Nice
 #'
 #' @description A demo of cool things
 #' @interactive
 #' @shortcut Ctrl+Alt+P
 praise::praise
 }\if{html}{\out{</div>}}
-\item \code{.shrtcts.yml}\if{html}{\out{<div class="yaml">}}\preformatted{- Name: Say Something Nice
+\item \code{.shrtcts.yml}
+
+\if{html}{\out{<div class="sourceCode yaml">}}\preformatted{- Name: Say Something Nice
   Description: A demo of cool things
   Binding: praise::praise
   shortcut: Ctrl+Alt+P
@@ -192,7 +201,9 @@ the roxygen2 format, use the internal \code{shrtcts:::migrate_yaml2r()}
 function.
 
 Use the following template to organize your \code{.shrtcts.yaml}. Each
-shortcut is a YAML list item with the following structure:\if{html}{\out{<div class="yaml">}}\preformatted{- Name: Make A Noise
+shortcut is a YAML list item with the following structure:
+
+\if{html}{\out{<div class="sourceCode yaml">}}\preformatted{- Name: Make A Noise
   Description: Play a short sound
   Binding: beepr::beep
   Interactive: true
@@ -203,11 +214,11 @@ shortcut is a YAML list item with the following structure:\if{html}{\out{<div cl
 }
 \section{Functions}{
 \itemize{
-\item \code{example_shortcuts_yaml}: An example \code{.shrtcts.yml} file.
+\item \code{example_shortcuts_yaml()}: An example \code{.shrtcts.yml} file.
 
-\item \code{example_shortcuts_r}: An example \code{.shrtcts.R} file.
+\item \code{example_shortcuts_r()}: An example \code{.shrtcts.R} file.
+
 }}
-
 \examples{
 # Add shortcuts to ~/.shrtcts.yaml (see help above)
 

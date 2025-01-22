@@ -3,7 +3,7 @@
 #' @id 1
 #' @interactive
 function() {
-    runif(10, 0, 10)
+  runif(10, 0, 10)
 }
 
 #' Say Something Nice
@@ -19,9 +19,14 @@ praise::praise
 #' @id 2
 #' @shortcut Ctrl+Alt+Shift+T
 function() {
-    tmp <- tempfile(fileext = ".Rmd")
-    rmarkdown::draft(tmp, template = "github_document", package = "rmarkdown", edit = FALSE)
-    rstudioapi::navigateToFile(tmp)
+  tmp <- tempfile(fileext = ".Rmd")
+  rmarkdown::draft(
+    tmp,
+    template = "github_document",
+    package = "rmarkdown",
+    edit = FALSE
+  )
+  rstudioapi::navigateToFile(tmp)
 }
 
 #' A Random Number Between 0 and 1
@@ -30,5 +35,5 @@ function() {
 #' @id 3
 #' @interactive
 function() {
-    runif(1, 0, 1)
+  runif(1, 0, 1)
 }

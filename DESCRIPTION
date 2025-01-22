@@ -1,6 +1,6 @@
 Package: shrtcts
 Title: Make Anything an RStudio Shortcut
-Version: 0.1.2
+Version: 0.1.2.9000
 Authors@R:
     person(given = "Garrick",
            family = "Aden-Buie",
@@ -25,9 +25,9 @@ Imports:
 Suggests:
     testthat (>= 2.1.0),
     knitr,
-    rmarkdown
+    rmarkdown,
+    cowsay
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr

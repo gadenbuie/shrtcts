@@ -27,7 +27,6 @@
 #' @name paths
 NULL
 
-
 # shrtcts source file -----------------------------------------------------
 
 #' @describeIn paths Find the path to `.shrtcts.R` or `.shrtcts.yml`.
@@ -50,7 +49,10 @@ locate_shortcuts_source <- function(path = NULL, all = FALSE) {
     return(path)
   }
   if (length(path) > 1) {
-    message("[shrtcts] Multiple {shrtcts} source files found, using ", path[[1]])
+    message(
+      "[shrtcts] Multiple {shrtcts} source files found, using ",
+      path[[1]]
+    )
     path <- path[[1]]
   }
   path
@@ -76,7 +78,9 @@ path_shortcuts_source <- function() {
   unname(paths)
 }
 
-maybe_create_shortcuts_file <- function(dir = rappdirs::user_config_dir("shrtcts")) {
+maybe_create_shortcuts_file <- function(
+  dir = rappdirs::user_config_dir("shrtcts")
+) {
   dir <- dir[1]
   path <- fs::path(dir, ".shrtcts.R")
   if (fs::file_exists(path)) return()
@@ -94,7 +98,8 @@ maybe_create_shortcuts_file <- function(dir = rappdirs::user_config_dir("shrtcts
 cant_path_shortcuts_source <- function() {
   stop(
     "Could not find .shrtcts.R or .shrtcts.yaml in ",
-    rappdirs::user_config_dir("shrtcts"), ", ",
+    rappdirs::user_config_dir("shrtcts"),
+    ", ",
     fs::path_home_r(".config"),
     " or ",
     fs::path_home_r(),
