@@ -27,9 +27,7 @@ praise::praise
   with_mocked_bindings(
     write_addins = function(...) TRUE,
     is_interactive = function(...) TRUE,
-    {
-      expect_message(add_rstudio_shortcuts(tmp_shrtcts, tmp_addins))
-    }
+    expect_message(add_rstudio_shortcuts(tmp_shrtcts, tmp_addins))
   )
 
   new_addins <- jsonlite::read_json(tmp_addins)
@@ -49,9 +47,7 @@ praise::praise
   with_mocked_bindings(
     write_addins = function(...) TRUE,
     is_interactive = function(...) TRUE,
-    {
-      expect_silent(add_rstudio_shortcuts(tmp_shrtcts, tmp_addins))
-    }
+    expect_silent(add_rstudio_shortcuts(tmp_shrtcts, tmp_addins))
   )
 
   expect_equal(fs::file_info(tmp_addins)$change_time, change_time)
@@ -70,9 +66,7 @@ praise::praise
   with_mocked_bindings(
     write_addins = function(...) TRUE,
     is_interactive = function(...) TRUE,
-    {
-      expect_message(add_rstudio_shortcuts(tmp_shrtcts, tmp_addins))
-    }
+    expect_message(add_rstudio_shortcuts(tmp_shrtcts, tmp_addins))
   )
 
   prev_addins <- new_addins
