@@ -24,10 +24,9 @@ praise::praise
   write_json(prev_addins, tmp_addins)
   writeLines(shrtcts_text, tmp_shrtcts)
 
-  with_mock(
+  with_mocked_bindings(
     write_addins = function(...) TRUE,
     is_interactive = function(...) TRUE,
-    .env = "shrtcts",
     expect_message(add_rstudio_shortcuts(tmp_shrtcts, tmp_addins))
   )
 
@@ -45,10 +44,9 @@ praise::praise
 
   # write again, expect no output ----
   change_time <- fs::file_info(tmp_addins)$change_time
-  with_mock(
+  with_mocked_bindings(
     write_addins = function(...) TRUE,
     is_interactive = function(...) TRUE,
-    .env = "shrtcts",
     expect_silent(add_rstudio_shortcuts(tmp_shrtcts, tmp_addins))
   )
 
@@ -65,10 +63,9 @@ praise::praise
     file = tmp_shrtcts
   )
 
-  with_mock(
+  with_mocked_bindings(
     write_addins = function(...) TRUE,
     is_interactive = function(...) TRUE,
-    .env = "shrtcts",
     expect_message(add_rstudio_shortcuts(tmp_shrtcts, tmp_addins))
   )
 
