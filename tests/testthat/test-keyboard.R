@@ -26,8 +26,7 @@ praise::praise
 
   local_mocked_bindings(
     write_addins = function(...) TRUE,
-    is_interactive = function(...) TRUE,
-    .package = "shrtcts"
+    is_interactive = function(...) TRUE
   )
   expect_message(add_rstudio_shortcuts(tmp_shrtcts, tmp_addins))
 
@@ -47,8 +46,7 @@ praise::praise
   change_time <- fs::file_info(tmp_addins)$change_time
   local_mocked_bindings(
     write_addins = function(...) TRUE,
-    is_interactive = function(...) TRUE,
-    .package = "shrtcts"
+    is_interactive = function(...) TRUE
   )
   expect_silent(add_rstudio_shortcuts(tmp_shrtcts, tmp_addins))
 
@@ -67,8 +65,7 @@ praise::praise
 
   local_mocked_bindings(
     write_addins = function(...) TRUE,
-    is_interactive = function(...) TRUE,
-    .package = "shrtcts"
+    is_interactive = function(...) TRUE
   )
   expect_message(add_rstudio_shortcuts(tmp_shrtcts, tmp_addins))
 
