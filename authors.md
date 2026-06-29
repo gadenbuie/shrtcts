@@ -10,13 +10,13 @@
 Source:
 [`DESCRIPTION`](https://github.com/gadenbuie/shrtcts/blob/main/DESCRIPTION)
 
-Aden-Buie G (2025). *shrtcts: Make Anything an RStudio Shortcut*. R
+Aden-Buie G (2026). *shrtcts: Make Anything an RStudio Shortcut*. R
 package version 0.1.2.9000, <https://pkg.garrickadenbuie.com/shrtcts>.
 
     @Manual{,
       title = {shrtcts: Make Anything an RStudio Shortcut},
       author = {Garrick Aden-Buie},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.1.2.9000},
       url = {https://pkg.garrickadenbuie.com/shrtcts},
     }

@@ -7,6 +7,7 @@
 You can install `shrtcts` from [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("gadenbuie/shrtcts")
 ```
@@ -19,6 +20,7 @@ include *any R code you want* as the shortcut, as long as it’s a
 function.
 
 ``` r
+
 #' Say Something Nice
 #'
 #' A demo of cool things.
@@ -35,6 +37,7 @@ run
 whenever you update your shortcuts.)
 
 ``` r
+
 # ~/.Rprofile
 if (interactive() && requireNamespace("shrtcts", quietly = TRUE)) {
   shrtcts::add_rstudio_shortcuts()
@@ -45,6 +48,7 @@ You can also tell **shrtcts** to automatically update the keyboard
 shortcuts assignments.
 
 ``` r
+
 # ~/.Rprofile
 if (interactive() && requireNamespace("shrtcts", quietly = TRUE)) {
   shrtcts::add_rstudio_shortcuts(set_keyboard_shortcuts = TRUE)

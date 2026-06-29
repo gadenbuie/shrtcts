@@ -8,6 +8,7 @@ include *any R code you want* as the shortcut, as long as it’s a
 function.
 
 ``` r
+
 #' Say Something Nice
 #'
 #' A demo of cool things.
@@ -24,6 +25,7 @@ run
 whenever you update your shortcuts.)
 
 ``` r
+
 # ~/.Rprofile
 if (interactive() && requireNamespace("shrtcts", quietly = TRUE)) {
   shrtcts::add_rstudio_shortcuts()
@@ -34,6 +36,7 @@ You can also tell **shrtcts** to automatically update the keyboard
 shortcuts assignments.
 
 ``` r
+
 # ~/.Rprofile
 if (interactive() && requireNamespace("shrtcts", quietly = TRUE)) {
   shrtcts::add_rstudio_shortcuts(set_keyboard_shortcuts = TRUE)
@@ -68,6 +71,7 @@ The comment format uses standard roxygen2 formatting, with a few
 additional roxygen tags specifically for **shrtcts**
 
 ``` r
+
 #' Say Something Nice
 #'
 #' A demo of cool things.
@@ -160,6 +164,7 @@ bindings with
 [list_shortcuts()](https://pkg.garrickadenbuie.com/shrtcts/reference/list_shortcuts.html).
 
 ``` r
+
 shrtcts::list_shortcuts()
 #>                                name       addin shrtcts_keybinding rstudio_keybinding
 #> 1                 10 random numbers shortcut_01               <NA>               <NA>
@@ -182,6 +187,7 @@ overwritten, so you should choose one method or the other.
 - `.shrtcts.R`
 
   ``` r
+
   #' Say Something Nice
   #'
   #' @description A demo of cool things
