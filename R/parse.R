@@ -22,7 +22,11 @@ roxy_tag_parse.roxy_tag_shortcut <- function(x) {
 
 #' @export
 roxy_tag_parse.roxy_tag_interactive <- function(x) {
-  roxygen2::tag_words_line(x)
+  if (utils::packageVersion("roxygen2") >= "8.0.0") {
+    roxygen2::tag_words(x)
+  } else {
+    roxygen2::tag_words_line(x)
+  }
 }
 
 parse_shortcuts_r <- function(path) {

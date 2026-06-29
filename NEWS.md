@@ -6,3 +6,6 @@
   workflow shortcuts and to run these shortcuts in
   [Positron](https://positron.posit.co/). (#26)
 
+* Use `roxygen2::tag_words()` instead of the deprecated `roxygen2::tag_words_line()`
+  when roxygen2 v8.0.0 or later is loaded.
+
